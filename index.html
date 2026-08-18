@@ -1,0 +1,1353 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/white.css">
+		<link rel="stylesheet" href="vipr.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+    <script src="https://tikzjax.com/v1/tikzjax.js"></script>
+	</head>
+	<body>
+    <div class="top1"></div>
+    <div class="top2"></div>
+    <div class="top3"></div>
+    <div class="bot1"></div>
+
+    <!-- 2. Create hidden header/footer <div> -->
+    <div id="hidden" style="display:none;">
+        <div id="header" style="background: var(--purp2);">
+            <div id="header-left">
+              <span class="header-title">test1</span>
+            </div>
+            <div id="header-right">
+              <span class="header-opsec">DISTRIBUTION STATEMENT A. Approved for public release; distribution is unlimited. OPSEC10975</span>
+            </div>
+            <!--<div id="header-right">HEADER-RIGHT</div>
+            <div id="footer-left">FOOTER-LEFT</div>-->
+        </div>
+    </div>
+    
+		<div class="reveal">
+			<div class="slides">
+
+				<!-- Title slide -->
+        <section>
+        <h1 class="r-fit-text">
+          Digital Engineering of Critical Components:
+        </h1>
+        <h1 class="r-fit-text">
+          Statistical Methods for Optimal Design and Analysis of Heavy-Duty
+          Diesel Pistons, Both in Vitro and in Silico
+        </h1>
+        <!--
+        <h2 class="subtitle">
+          FA 3.22.8
+        </h2>
+        -->
+        <p class="author">Stephen Wright</p>
+        <p class="date">August 7, 2026</p>
+        <p style="font-size: 18pt;">
+          DISTRIBUTION STATEMENT A. Approved for public release; distribution is unlimited. OPSEC10975
+        </p>
+        <aside class="notes">
+          Hello everyone...<br>
+          presenting the work of my dissertation entitled...
+
+        </aside>
+        </section>
+
+        <section>
+            <section>
+                <h1>Introduction</h1>
+            </section>
+            <section data-header="Introduction [Motivation]">
+                <h2>Piston Fatigue</h2>
+
+                <div class=figcols>
+                
+                    <div style="width: 130%; height: auto;">
+                        <p>Fatigue failure is the primary concern for failure of internal combustion engine (ICE) pistons due to cyclic thermal and mechanical loads
+                        </p>
+                        <ul>
+                            <li>Combustion pressure</li>
+                            <li>Heat softening</li>
+                            <li>Thermal stresses</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <div class="figcols">
+                            <div class="figure">
+                                <img src="https://www.renntech.org/uploads/monthly_08_2008/post-4-1219793789_thumb.jpg">
+                            </div>
+                        
+                            <div class="figure">
+                                <img src="https://www.aa1car.com/library/diesel_piston_damage.jpg">
+                            </div>
+                        </div>
+                        <div class="figure" style="width: 110%; height: auto;">
+                            <img src="https://ars.els-cdn.com/content/image/1-s2.0-S1350630705000580-gr4.jpg">
+                            <figcaption>Example piston failures [1,2,3].</figcaption>
+                        </div>
+                    </div>
+                </div>
+                <aside class="notes">
+                    The context of my work is based in fatigue of pistons<br>
+                    ...
+                    primary failure mechanism for pistons<br>
+                    due to 
+                </aside>
+            </section>
+
+            <section data-header="Introduction [Motivation]" data-auto-animate>
+                <h2>Piston Modeling</h2>
+                <div class="figcols">
+                    <div style="width: 80%;">
+                        <p>
+                            Computer models can be used
+                        </p>
+                        <ul>
+                            <li>Computational fluid dynamics (CFD) for combustion heat transfer and pressure</li>
+                            <li>Finite element analysis (FEA) of piston temperature and stress</li>
+                        </ul>
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/intro/fem_results.png">
+                        <figcaption>2D FEA heat transfer solution.</figcaption>
+                    </div>
+                </div>
+            </section>
+
+            <!--CFD submodels-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+                    <rect x="38" y="30" width="190" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+
+            <section data-header="Piston Co-Simulation">
+                <h2>CFD Submodels</h2>
+                Models controlling specific physics details in the main CFD model
+                <ul>
+                    <li>E.g. spray break-up, evaporation, turbulent dispersion, collision, drop drag, spray-wall interaction, wall splash, turbulence, heat transfer</li>
+                </ul>
+                Details of CFD modeling and submodels described in the work of Ravikumar [27,28]
+            </section>
+
+            <!--Crown guess-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+                    <rect x="231" y="30" width="190" height="165" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+                <!--CFD model-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+                    <rect x="38" y="143" width="190" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>CFD Model</h2>
+                <div class="figcols">
+                    <div style="width: 100%; font-size: 24pt;">
+                        Solves the thermodynamics, heat transfer, and fluid dynamics of the combustion event
+                        <ul>
+                            <li>Inputs: submodels, combustion chamber geometry, fuel properties, piston crown surface temperature</li>
+                            <li>Outputs: pressure, velocity, temperature, heat flux fields in the combustion chamber</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <video
+                        data-autoplay controls loop
+                        src="assets/figures/cosim/CFD_vid2.mp4"
+                        ></video>
+                    </div>
+                </div>
+            </section>
+
+            <!--experimental testing-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+                    <rect x="413" y="30" width="215" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>Experimental Testing</h2>
+                <div class="figcols">
+                    <div style="font-size: 24pt; width: 90%;">
+                        <ul>
+                            <li>Wireless telemetry system for piston thermocouples and heat flux probes</li>
+                            <li>Additional pressure and heat flux instrumentation in cylinder</li>
+                        </ul>
+                        <div class="figure">
+                            <img src="assets/figures/cosim/experimental_temps.png" width="80%;">
+                        </div>
+                    </div>
+                    <div style="width: 60%;">
+                        <div class="figure">
+                            <img src="assets/figures/cosim/crown_tcs.jpg">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!--Validated CFD model-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+                    <rect x="11" y="308" width="242" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>CFD Validation</h2>
+                <div class="figcols">
+                    <div style="width: 80%; font-size: 28pt;">
+                        Validation of CFD model to experimental data by in-cylinder pressure and heat release rate
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/cosim/cfd_validation.png">
+                    </div>
+                </div>
+            </section>
+
+            <!--Map to FEA-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+                    <rect x="262" y="262" width="186" height="172" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>CFD Results Mapping</h2>
+                <div class="figcols">
+                    <div style="width: 70%">
+                        CFD predicted heat transfer to the piston crown is mapped to the FEA model as a convection boundary condition
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/cosim/mapping.png">
+                    </div>
+                </div>
+            </section>
+
+            <!--FEA model-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+                    <rect x="425" y="198" width="190" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>Finite Element Model</h2>
+                <div class="figcols">
+                    <div style="font-size: 24pt;">
+                        <ul>
+                            <li>First order, diffusive, solid tetrahedron elements</li>
+                            <li>Steady state heat transfer solution</li>
+                            <li>Inputs: CFD mapping, backside boundary conditions, solid material properties</li>
+                            <li>Outputs: steady state temperature solution</li>
+                        </ul>
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/intro/fem_results.png">
+                        <figcaption>2D FEA heat transfer solution.</figcaption>
+                    </div>
+                </div>
+            </section>
+
+            <!--unknown parameters-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 800 600" width="1000" height="600" class="fragment fade-in">
+                    <rect x="531" y="30" width="220" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>Unknown Parameters</h2>
+                <div class="figcols">
+                    <div style="width: 80%; font-size: 24pt;">
+                        Many backside boundary conditions are unknown
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/sensor_opt/main2.png">
+                    </div>
+                </div>
+            </section>
+
+            <!--Model Calibration-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+                    <rect x="635" y="130" width="213" height="213" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>Model Calibration</h2>
+                <div class="figcols">
+                    <div style="width: 80%; font-size: 28pt;">
+                        Bayesian model calibration can be used to fine-tune these unknown parameters
+                        <ul>
+                            <li>Cycle-averaged experimental temperaure</li>
+                            <li>FE-predicted steady state temperature</li>
+                        </ul>
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/cosim/model_calibration.png">
+                    </div>
+                </div>
+            </section>
+
+            <!--Calibrated Parameters-->
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+                    <rect x="626" y="363" width="232" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>Calibrated Parameters</h2>
+                <div class="figcols">
+                    <div style="width: 80%;">
+                        Probability distribution of unknown parameters conditioned on data
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/cosim/prior_posterior.png">
+                    </div>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:95%; height: auto;">
+                        <img src="assets/figures/cosim/cosim_flowchart2.png">
+                    </div>
+                    <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+                    <rect x="230" y="113" width="190" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Piston Co-Simulation">
+                <h2>Co-simulation</h2>
+                <div class="figcols">
+                    <div class="figure" style="width: 70%;">
+                        <img src="assets/figures/cosim/crown_surface2.png">
+                    </div>
+                </div>
+
+            </section>
+
+        </section>
+
+        <section>
+            <section>
+                <h1>Bayesian Model Calibration</h1>
+            </section>
+            <section data-header="Bayesian Model Calibration [Introduction]">
+                <h2>Bayes' Theorem</h2>
+                <p style="font-size: 24pt;">The objective is to learn about unknown model parameters, $\boldsymbol{\theta} = (\theta_1,\theta_2,\ldots,\theta_P)$ through Bayesian inference</p>
+                <div class="block">
+                    Bayes' theorem
+                    $$\pi(\boldsymbol{\theta}|\mathbf{y}) = \frac{\pi(\mathbf{y}|\boldsymbol{\theta}) \pi(\boldsymbol{\theta})}{\pi(\mathbf{y})}$$
+                </div>
+            </section>
+
+            <section data-header="Bayesian Model Calibration [Introduction]">
+                <h2>Bayes' Theorem</h2>
+                <div class="figcols">
+                    <div>
+                        <ul>
+                            <li>Posterior, $\pi(\boldsymbol{\theta}|\mathbf{y})$</li>
+                            <li>Likelihood, $\pi(\mathbf{y}|\boldsymbol{\theta})$</li>
+                            <li>Prior, $\pi(\boldsymbol{\theta})$</li>
+                            <li>Evidence, $\pi(\mathbf{y})$</li>
+                        </ul>
+                    </div>
+                    <div>
+                        $$\pi(\boldsymbol{\theta}|\mathbf{y}) = \frac{\pi(\mathbf{y}|\boldsymbol{\theta}) \pi(\boldsymbol{\theta})}{\pi(\mathbf{y})}$$
+                    </div>
+                </div>
+            </section>
+            <section data-header="Bayesian Model Calibration [Introduction]">
+                <h2>Bayes' Theorem</h2>
+                <h4>Likelihood</h4>
+                For independent and identically distributed (i.i.d.) data
+                $$\pi(\mathbf{y}|\theta) = \prod_{i=1}^N \pi(Y=y_i|\theta)$$
+            </section>
+            <section data-header="Bayesian Model Calibration [Introduction]">
+                <h2>Bayes' Theorem</h2>
+                <h4>Evidence</h4>
+                For i.i.d. data
+                $$\pi(\mathbf{y}) = \prod_{i=1}^N \pi(Y=y_i) = \prod_{i=1}^N \int_{\theta} \pi(y_i|\theta) \pi(\theta) d\theta$$
+            </section>
+            <section data-header="Bayesian Model Calibration [Introduction]">
+                <h2>Bayes' Theorem</h2>
+                <h4>Evidence</h4>
+                <ul>
+                    <li>$\prod_{i=1}^N \int_{\theta} \pi(y_i|\theta) \pi(\theta) d\theta$ is often intractable</li>
+                    <li>$\pi(\mathbf{y})$ does not depend on $\boldsymbol{\theta}$, it is a normalizing constant</li>
+                </ul>
+                <div class="block">
+                    $$\pi(\boldsymbol{\theta}|\mathbf{y}) \propto \pi(\mathbf{y}|\boldsymbol{\theta}) \pi(\boldsymbol{\theta})$$
+                </div>
+            </section>
+
+            <section data-header="Bayesian Model Calibration [Introduction]">
+                <h2>Bayes' Theorem</h2>
+                <h4>Evidence</h5>
+                Numerical methods, like Markov Chain Monte Carlo (MCMC) simulation, can be used with this proportional distribution
+                <ul>
+                    <li>Draw finite samples of $\pi(\boldsymbol{\theta}|\mathbf{y})$</li>
+                    <li>Can be computationally expensive</li>
+                </ul>
+            </section>
+
+            <!--Exp Data-->
+            <section data-header="Bayesian Model Calibration">
+                <h2>Bayesian Model Calibration</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/calibration/calibration_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 800 400" width="800" height="400" class="fragment fade-in">
+                    <rect x="37" y="27" width="230" height="85" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Bayesian Model Calibration [Data Model]">
+                <h2>Data Representation</h2>
+                Experimental data has the form
+                $$y_i|\mathbf{x}_i = f(\mathbf{x}_i) + \varepsilon(\mathbf{x}_i)$$
+                <ul>
+                    <li>$f(\mathbf{x})$ is an unknown function describing the physical phenomenon being measured</li>
+                    <li>$\varepsilon$ is observational error (aleatoric)</li>
+                    <li>$\mathbf{x}_i = (x_{1,i},x_{2,i},\ldots,x_{Q,i})$ are independent variables</li>
+                </ul>
+            </section>
+
+            <!--Computer model-->
+            <section data-header="Bayesian Model Calibration">
+                <h2>Bayesian Model Calibration</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/calibration/calibration_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 800 450" width="800" height="450" class="fragment fade-in">
+                    <rect x="10" y="127" width="285" height="275" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-auto-animate data-header="Bayesian Model Calibration">
+                <h2>Computer Model</h2>
+
+                <div data-id="keep">
+                A computer model can be used to approximate $f(\cdot)$
+                $$ y_i|\mathbf{x}_i = g(\mathbf{x}_i,\boldsymbol{\theta}) + \delta(\mathbf{x}_i) + \varepsilon(\mathbf{x}_i)$$
+                </div>
+                <p class="fragment fade-in-then-out">The computer model, $g(\cdot,\cdot)$ requires specification of unknown parameters, $\boldsymbol{\theta} = (\theta_1,\theta_2,\ldots,\theta_P)$</p>
+            </section>
+
+            <section data-auto-animate data-header="Bayesian Model Calibration">
+                <h2>Computer Model</h2>
+                <div data-id="keep">
+                A computer model can be used to approximate $f(\cdot)$
+                $$ y_i|\mathbf{x}_i = g(\mathbf{x}_i,\boldsymbol{\theta}) + \delta(\mathbf{x}_i) + \varepsilon(\mathbf{x}_i)$$
+                </div>
+                <p>The new term, $\delta(\mathbf{x})$ is the discrepancy term and describes inaccuracies or missing physics in the computer model (epistemic error)</p>
+            </section>
+
+            <!--Data Model-->
+            <section data-header="Bayesian Model Calibration">
+                <h2>Bayesian Model Calibration</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/calibration/calibration_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 800 400" width="800" height="400" class="fragment fade-in">
+                    <rect x="313" y="27" width="230" height="85" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+            
+            <section data-header="Bayesian Model Calibration" data-auto-animate>
+                <h2>Data Model</h2>
+                If the observational errors, $\varepsilon$, are independent and identically distributed from a Gaussian distribution,
+                the data can be represented by a multivariate normal distribution
+
+                $$\mathbf{y}|\mathbf{X} \sim \textrm{MVN} \Big\{ \big[ g(\mathbf{X},\boldsymbol{\theta}) + \delta(\mathbf{X}) \big], \sigma^2 \mathbf{I} \Big\}$$
+            </section>
+
+            <!--Likelihood-->
+            <section data-header="Bayesian Model Calibration">
+                <h2>Bayesian Model Calibration</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/calibration/calibration_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 800 400" width="800" height="400" class="fragment fade-in">
+                    <rect x="313" y="138" width="230" height="85" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+
+            <!--Priors-->
+            <section data-header="Bayesian Model Calibration">
+                <h2>Bayesian Model Calibration</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/calibration/calibration_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 800 400" width="800" height="400" class="fragment fade-in">
+                    <rect x="303" y="248" width="250" height="85" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <!--MCMC-->
+            <section data-header="Bayesian Model Calibration">
+                <h2>Bayesian Model Calibration</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/calibration/calibration_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 1000 400" width="1000" height="400" class="fragment fade-in">
+                    <rect x="660" y="57" width="200" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Bayesian Model Calibration">
+                <h2>MCMC Simulation</h2>
+                <ul>
+                    <li>Numerical approach to draw finite samples of the posterior</li>
+                    <li>Metropolis-Hastings algorithm</li>
+                    <ul>
+                        <li>Random walk: propose a stochastic value for $\boldsymbol{\theta}$ and evaluated whether to accept or reject</li>
+                        <li>Can be computationally expensive</li>
+                    </ul>
+                </ul>
+            </section>
+
+            <section data-header="Bayesian Model Calibration">
+                <h2>Surrogate Modeling</h2>
+                <ul>
+                    <li>The MCMC approach requires evaluating the likelihood many thousands of times</li>
+                    <li>Each evaluation of the likelihood requires evaluating $g(\cdot,\cdot)$ for an arbitrary input of $\boldsymbol{\theta}$</li>
+                    <li>For most computer models it is computationally infeasible to evaulate the computer model directly</li>
+                    <li>A surrogate model, $\eta(\cdot,\cdot) \approx g(\cdot,\cdot)$ can be used</li>
+                    <ul>
+                        <li>Traditionally a Gaussian process surrogate model</li>
+                    </ul>
+                </ul>
+            </section>
+
+
+            <!--
+            <section data-header="Bayesian Model Calibration">
+                <h2>Prior Distributions</h2>
+                $$\theta \sim \textrm{U}(\min \theta_{\eta},\max \theta_{\eta})$$
+                $$\sigma^2 \sim \textrm{IG}(1\textrm{E-}9,1\textrm{E-}9)$$
+                $$\tau^2 \sim \textrm{IG}(1\textrm{E-}9,1\textrm{E-}9)$$
+                $$\delta \sim \textrm{GP}(\boldsymbol{0},\boldsymbol{\Sigma})$$
+                $$\rho \sim \textrm{Beta}(1,1)$$
+            </section>
+            -->
+
+            <!--MCMC-->
+            <section data-header="Bayesian Model Calibration">
+                <h2>Bayesian Model Calibration</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/calibration/calibration_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 1000 400" width="1000" height="400" class="fragment fade-in">
+                    <rect x="620" y="224" width="280" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Bayesian Model Calibration">
+                <h2>Posterior Evaluation</h2>
+                <div class="figcols">
+                    <div class="figure">
+                        <img src="assets/figures/calibration/posterior_res.png">
+                    </div>
+                </div>
+                <!--
+                Markov chain Monte Carlo simulation can be used to draw samples from the posterior distributions
+                <ul>
+                    <li>Standard Gibbs updates for $\sigma^2$, $\tau^2$, and $\boldsymbol{\delta}$</li>
+                    <li>Metropolis-Hastings updates for $\boldsymbol{\theta}$ and $\boldsymbol{\rho}$</li>
+                </ul>
+                -->
+            </section>
+        </section>
+
+        <section>
+            <section>
+                <h1>Griddy Gibbs Calibration</h1>
+                <h1 class="r-fit-text">An Efficient statistical inference approach for model calibration using griddy gibbs sampling</h1>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Motivation]">
+                <h2>Motivation</h2>
+                The primary drawbacks of Bayesian model calibration
+                <ul>
+                    <li>Computational expense</li>
+                    <ul>
+                        <li>Surrogate model training</li>
+                        <li>Surrogate model evaluation during MCMC</li>
+                    </ul>
+                    <li>Identifiability problems caused by the discrepancy term</li>
+                    <!--<li>Sensitivity of the Metropolis-Hastings algorithm to step size</li>-->
+                    
+                </ul>
+            </section>
+            
+            <section data-header="Griddy Gibbs Calibration [Motivation]">
+                <h2>Motivation</h2>
+                <div class="figcols">
+                    <div style="width:100%;">
+                        If the domain and codomain of $g$ were finite...
+                        <ul>
+                            <li>Precompute to draw finite samples of the posterior distribution much more efficiently</li>
+                        </ul>
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/gg/cont_vs_disc.png">
+                        <figcaption>Continuous v.s. discrete estimate of posterior</figcaption>
+                    </div>
+                </div>
+                <aside class="notes">
+                    Computational expense is due to the continuous nature of the computer model inputs and outputs<br>
+                    ...
+                </aside>
+            </section>
+
+            <!--sampler-->
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Approach</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/gg/gg_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+                    <rect x="625" y="35" width="274" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Griddy Gibbs sampling</h2>
+                Given data model $f(\mathbf{y}|\theta)$ and prior $\pi(\theta)$
+                <ul>
+                    <li>Construct grid of $\theta$: $\theta_1,\theta_2,\ldots,\theta_J$</li>
+                    <!--<li>For each $j=1,\ldots,J$, compute $q_j = f(\mathbf{y}|\theta_j)\pi(\theta_j)$</li>
+                    <li>For each $j=1,\ldots,J$, compute $p_j = \frac{q_j}{\sum_{k=1}^J q_k}$</li>-->
+                    <li>Compute proportional posterior probability, $q_j = f(\mathbf{y}|\theta_j)\pi(\theta_j)$</li>
+                    <li>Compute normalized posterior probability, $p_j = \frac{q_j}{\sum_{k=1}^J q_k}$</li>
+                    <li>Sample from discrete probabilities $p_1,p_2,\ldots,p_J$</li>
+                </ul>
+                <aside class="notes">
+                    ...<br>
+                    ...<br>
+                    quantity q is proporional posterior posterior probability<br>
+                    quantity p is the normalized posterior probability<br>
+                </aside>
+            </section>
+
+            <!--Data Model-->
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Approach</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/gg/gg_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 1000 400" width="1000" height="400" class="fragment fade-in">
+                    <rect x="79" y="163" width="215" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Data Model</h2>
+                We can integrate the discrepancy term from the mean to the covariance
+                $$\footnotesize \mathbf{y} \sim \textrm{MVN}(\mathbf{g} + \boldsymbol{\delta},\sigma^2 \mathbf{I}) \rightarrow \mathbf{y} \sim \textrm{MVN}(\mathbf{g} ,\sigma^2 \mathbf{I} + \boldsymbol{\Sigma})$$
+                <ul>
+                    <li>Preserves the accounting for epistemic error</li>
+                    <li>Makes the MCMC much more stable in terms of identifiability</li>
+                </ul>
+            </section>
+
+            <!--Select Grid-->
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Approach</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/gg/gg_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+                    <rect x="55" y="300" width="263" height="260" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+            <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Formulation of Sampling Grid</h2>
+                The choice of the grid of discrete values of $\theta$ is important.<br>
+                Consider we can only afford to evaluate 20 grid points
+            </section>
+            <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Formulation of Sampling Grid</h2>
+                <div class="figcols">
+                    <div style="width: 80%;">
+                        If we choose the grid of $\theta$ naively, this will result in a poor estimate
+                        of the posterior                
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/gg/naive_grid.png">
+                    </div>
+                </div>
+            </section>
+            <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Formulation of Sampling Grid</h2>
+                <div class="figcols">
+                    <div style="width: 80%;">
+                        If we choose the grid of $\theta$ wisely, we can get a much better estimate
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/gg/improved_grid.png">
+                    </div>
+                </div>
+            </section>
+            <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Formulation of Sampling Grid</h2>
+                <p style="font-size: 28pt;">Find the approximate upper and lower bounds, $\theta_U$ and $\theta_L$ corresponding to the asymptotes of the likelihood</p>
+                <ol style="font-size: 28pt;">
+                    <li>Train a surrogate model, $\eta$, on $g$</li>
+                    <li>Find $\widehat{\theta}_{MLE}$ from $L|\eta$</li>
+                    <li>Step away from $\widehat{\theta}_{MLE}$ until $\frac{\Delta L|\eta}{\Delta \theta} \approx 0$ </li>
+                </ol>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Evaluation of Asymptotic Bounds</h2>
+                <div class="figcols">
+                <div class="figure">
+                    <img src="assets/figures/gg/lik_bounds.png" width="700px;">
+                </div>
+                </div>
+            </section>
+            <!--
+            <section data-header="Griddy Gibbs Calibration [Grid Selection]">
+                <h2>Evaluation of Asymptotic Bounds</h2>
+                <ol>
+                    <li>Iterate over $p = 1,\ldots,P$</li>
+                    <ol start="2">
+                        <li>Set $\boldsymbol{\theta}^0 = \widehat{\boldsymbol{\theta}}_{MLE}$</li>
+                        <li>Evaluate $L^0 = L(\cdot|\eta(\boldsymbol{\theta^0}))$</li>
+                        <li>Set iterator $k = 1$</li>
+                        <ol start="5">
+                            <li>Set $\theta_p^k = \theta_p^{k-1} + \delta$</li>
+                            <li>Set $\theta_1^k,\ldots,\theta_{p-1}^k,\theta_{p+1}^k,\ldots,\theta_P^k = 
+                                \theta_1^{k-1},\ldots,\theta_{p-1}^{k-1},\theta_{p+1}^{k-1},\ldots,\theta_P^{k-1}$
+                            </li>
+                        </ol>
+                    </ol>
+
+                    
+                </ol>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Grid Selection]">
+                <h2>Evaluation of Asymptotic Bounds</h2>
+                <ol start="2">
+                    <ol start="4">
+
+                        <ol start="7">
+                            <li>Evaluate $L^k(\cdot|\eta(\boldsymbol{\theta}^k))$</li>
+                            <li>Calculate difference, $\Delta L = L^{k-1}(\cdot|\eta(\boldsymbol{\theta}^k)) - L^{k}(\cdot|\eta(\boldsymbol{\theta}^k))$</li>
+                            <li>If $\Delta L > 1\textrm{E-}8$, set $k=k+1$ and repeat from 5</li>
+                            <li>If If $\Delta L \leq 1\textrm{E-}8$, set $\theta_{p,U} = \theta_p^k$</li>
+                        </ol>
+                    </ol>
+                </ol>
+            </section>
+            -->
+
+            <!--Precompute-->
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Approach</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/gg/gg_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+                    <rect x="309" y="322" width="265" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Likelihood</h2>
+                $$\footnotesize \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi)= \frac{1}{ \sqrt{2\pi \sigma^2|\boldsymbol{\Sigma}^*|}} \exp\left\{-\frac{C(\boldsymbol{\theta},\phi,\rho)}{2\sigma^2}\right\}$$
+                <ul>
+                    <li>$\footnotesize C(\boldsymbol{\theta},\phi,\rho)=\{\mathbf{y}-\eta(\mathbf{x}_i,\boldsymbol{\theta})\}^T{\boldsymbol{\Sigma}^*}^{-1}\{\mathbf{y}-\eta(\mathbf{x}_i,\boldsymbol{\theta})\}$</li>
+                </ul>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Precomputation</h2>
+                <ol style="font-size: 24pt;">
+                    <li>Precompute $C(\boldsymbol{\theta},\phi,\rho)$</li>
+                    <ul>
+                        <li>Over selected grid of $\boldsymbol{\theta}$ and grids of $\phi$ and $\rho$</li>
+                    </ul>
+                    <li>Precompute $|\boldsymbol{\Sigma}^*|$</li>
+                    <ul>
+                        <li>Over grids of $\phi$ and $\rho$</li>
+                    </ul>
+                </ol>
+                <div class="block">
+                    Evaluation of the likelihood is trivial when these are precomputed
+                </div>
+            </section>
+            
+            <!--
+            <section data-header="Griddy Gibbs Calibration [Posterior]">
+                <h2>Joint Posterior</h2>
+                $$
+                \begin{align*}
+                \pi(\boldsymbol{\theta},\sigma^2,\rho,\phi| \mathbf{y})\propto \\ 
+                \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) 
+                \pi(\boldsymbol{\theta})\pi(\sigma^2)\pi(\rho)\pi(\phi)
+                \end{align*}
+                $$
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Posterior]">
+                <h2>Full Conditionals</h2>
+                $$
+                \begin{align*}
+                    \pi(\boldsymbol{\theta}| \mathbf{y},\sigma^2,\rho,\phi) & \propto 
+                    \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) \pi(\boldsymbol{\theta}) \\
+                    \pi(\sigma^2|\mathbf{y},\boldsymbol{\theta},\rho,\phi) & \propto \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) \pi(\sigma^2)\\
+                    \pi(\rho|\mathbf{y},\boldsymbol{\theta},\sigma^2,\phi) & \propto \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) \pi(\rho) \\
+                    \pi(\phi| \mathbf{y}, \boldsymbol{\theta},\sigma^2,\rho) &\propto 
+                    \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) \pi(\phi) 
+                \end{align*}
+                $$
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Posterior]">
+                <h2>Posterior Sampling</h2>
+                <ul>
+                    <li>Draw $\sigma^{2(s+1)} \sim \textrm{IG}\left(\frac{n}{2}+\alpha_1, \frac{1}{2}C_{j_1^{(s)},j_2^{(s)},j_3^{(s)}} +\beta_1 \right)$</li>
+                    <li>Griddy Gibbs sampling for $\boldsymbol{\theta}$, $\phi$, and $\rho$</li>
+                </ul>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Posterior]">
+                <h2>Posterior Sampling</h2>
+                Draw $\boldsymbol{\theta}^{(s+1)}$ from $\{\boldsymbol{\theta}_1,\ldots,\boldsymbol{\theta}_{J_1}\}$, with probabilities $\{p_{1}^{\boldsymbol{\theta}},\ldots,p_{J_1}^{\boldsymbol{\theta}}\}$, 
+            where $p_{j_1}^{\boldsymbol{\theta}} = q_{j_1}^{\boldsymbol{\theta}}\{\sum_{k=1}^{J_1} q_{k}^{\boldsymbol{\theta}}\}^{-1}$ and
+            $$\begin{align*}
+            q_{j_1}^{\boldsymbol{\theta}}=\exp\left\{-\frac{C_{j_1,j_2^{(s)},j_3^{(s)}}}{2\sigma^{2(s+1)}} \right\} \pi(\boldsymbol{\theta}_{j_1}), 
+            \end{align*}$$
+            and set $j_1^{(s+1)}$ to be the index of the sampled value.
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Posterior]">
+                <h2>Posterior Sampling</h2>
+                Draw $\rho^{(s+1)}$ from $\{\rho_1,\ldots,\rho_{J_2}\}$, with probabilities $\{p_{1}^{\rho},\ldots,p_{J_2}^{\rho}\}$, 
+            where $p_{j_2}^{\rho} = q_{j_2}^{\rho}\{\sum_{k=1}^{J_2} q_{k}^{\rho}\}^{-1}$ and
+            $$\begin{align*}
+            q_{j_2}^{\rho}=D_{j_2,j_3^{(s)}}^{-1/2}\exp\left\{-\frac{C_{j_1^{(s+1)},j_2,j_3^{(s)}}}{2\sigma^{2(s+1)}} \right\} \pi(\rho_{j_2}),
+            \end{align*}$$
+            and set $j_2^{(s+1)}$ to be the index of the sampled value.
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Posterior]">
+                <h2>Posterior Sampling</h2>
+                Draw $\phi^{2(s+1)}$ from $\{\phi_1,\ldots,\phi_{J_3}\}$, with probabilities $\{p_{1}^{\phi},\ldots,p_{J_3}^{\phi}\}$, 
+            where $p_{j_3}^{\phi} = q_{j_3}^{\phi}\{\sum_{k=1}^{J_3} q_{k}^{\phi}\}^{-1}$ and
+            $$\begin{align*}
+            q_{j_3}^{\phi}=D_{j_2^{(s+1)},j_3}^{-1/2} \exp\left\{-\frac{C_{j_1^{(s+1)},j_2^{(s+1)},j_3}}{2\sigma^{2(s+1)}} \right\} \pi(\phi_{j_3}),
+            \end{align*}$$
+            and set $j_3^{(s+1)}$ to be the index of the sampled value.
+            </section>
+            -->
+
+            <!--Priors-->
+            <!--
+            <section>
+                <h2>Approach</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/gg/gg_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 1000 600" width="1000" height="600">
+                    <rect x="329" y="195" width="225" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Priors]">
+                <h2>Prior Distributions</h2>
+                <ul>
+                    <li>$\pi(\theta_p) \sim \textrm{U}(a_p,b_p)$</li>
+                    <li>$\pi(\sigma^2) \sim \textrm{IG}(\alpha_1,\beta_1)$</li>
+                    <li>$\pi(\phi) \sim \textrm{IG}(\alpha_2,\beta_2)$</li>
+                    <li>$\pi(\rho) \sim \textrm{U}(0,1)$</li>
+                </ul>
+            </section>
+            -->
+
+            
+            
+            <section data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Case Study</h2>
+                Calibration of three unknown boundary conditions in a piston heat transfer model
+                <ul>
+                    <li>Determine the sufficient number of grid points for the griddy Gibbs approach</li>
+                    <li>Compare the proposed griddy Gibbs approach to traditional Bayesian model calibration</li>
+                </ul>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Case Study</h2>
+                <div class="figcols">
+                    <div style="width: 120%;">
+                        Synthetic data
+                        <ul style="font-size: 24pt;">
+                            <li>Undercrown BC, $$\theta_1^* = 1000 \textrm{W}\textrm{m}^{-2}\textrm{K}^{-1}$$</li>
+                            <li>Gallery 1 BC, $$\theta_2^* = 3000 \textrm{W}\textrm{m}^{-2}\textrm{K}^{-1}$$</li>
+                            <li>Gallery 2 BC, $$\theta_3^* = 2000 \textrm{W}\textrm{m}^{-2}\textrm{K}^{-1}$$</li>
+                        </ul>
+                    </div>
+                    <div class="figure">
+                        <img src="assets/figures/gg/bcs_tcs.png">
+                        <figcaption>Boundary conditions and measurement locations</figcaption>
+                    </div>
+                </div>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Data Generation</h2>
+                <ul>
+                    <li>6, 15, 27, and 54 temperature responses were considered</li>
+                    <li>Two sets of data were considered</li>
+                    <ul style="font-size: 28pt;">
+                        <li>Data without discrepancy, $y = g(\mathbf{X},\boldsymbol{\theta}^*) + \boldsymbol{\varepsilon}$</li>
+                        <li>Data with discrepancy, $y = g(\mathbf{X},\boldsymbol{\theta}^*) + \boldsymbol{\delta} + \boldsymbol{\varepsilon}$</li>
+                        <li>$\delta(\mathbf{x}) \sim \textrm{GP}(\boldsymbol{0},\Sigma(\mathbf{x},\mathbf{x}'))$</li>
+                        <li>$\Sigma(\mathbf{x},\mathbf{x}') = 40 \prod_{k=1}^{Q} 0.8^{4 (x_k - x_k')^2}$</li>
+                        <li>$\varepsilon \sim \textrm{N}(0,0.4)$</li>
+                    </ul>
+                </ul>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Study 1</h2>
+                <ul>
+                    <li>For both sets of data (discrepancy and no discrepancy) evaluate the griddy gibbs calibration</li>
+                    <ul>
+                        <li>Grid densities ranging from 7 to 49</li>
+                    </ul>
+                    <li>Determine sufficient grid density (when results are independent of grid density)</li>
+                </ul>
+
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Study 1 Results</h2>
+                <div class="figure">
+                    <img src="assets/figures/gg/test_nsimstudy_ny6.png">
+                    <figcaption>Posterior estimates for $n_y=6$ as a function of grid density, with and without discrepancy in the data</figcaption>
+                </div>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Study 1 Results</h2>
+                <div class="figure">
+                    <img src="assets/figures/gg/test_nsimstudy_ny54.png">
+                    <figcaption>Posterior estimates for $n_y=54$ as a function of grid density, with and without discrepancy in the data</figcaption>
+                </div>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Study 2</h2>
+                <ul>
+                    <li>Compare the proposed griddy Gibbs approach to traditional Bayesian model calibration</li>
+                    <ul>
+                        <li>Posterior distributions</li>
+                        <li>Computational cost of each method</li>
+                    </ul>
+                </ul>
+            </section>
+            <section data-auto-animate data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Study 2 Results</h2>
+                <div class="figure">
+                    <img src="assets/figures/gg/ny6nsim49_thetahist_combined.png">
+                    <figcaption>Comparison of griddy Gibbs and traditional calibration for $n_y=6$</figcaption>
+                </div>
+            </section>
+            <section data-auto-animate data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Study 2 Results</h2>
+                <div class="figure">
+                    <img src="assets/figures/gg/ny54nsim49_thetahist_combined.png">
+                    <figcaption>Comparison of griddy Gibbs and traditional calibration for $n_y=54$</figcaption>
+                </div>
+            </section>
+            <!--
+            <section>
+                <h2>Comparison Results</h2>
+                <div class="figure">
+                    <img src="assets/figures/gg/gg_table1.png">
+                    <figcaption></figcaption>
+                </div>
+            </section>
+            <section>
+                <h2>Comparison Results</h2>
+                <div class="figure">
+                    <img src="assets/figures/gg/gg_table2.png">
+                </div>
+            </section>
+            -->
+            <section data-header="Griddy Gibbs Calibration [Case Study]">
+                <h2>Study 2 Results</h2>
+                <div class="figure">
+                    <img src="assets/figures/gg/gg_table3.png">
+                    <figcaption>Comparison of computational expense for the griddy Gibbs and traditional calibration approaches</figcaption>
+                </div>
+            </section>
+            <section data-auto-animate data-header="Griddy Gibbs Calibration [Conclusion]">
+                <h2>Conclusions</h2>
+                <ol>
+                    <li>The griddy Gibbs approach offers comparable posterior estimation to the traditional calibration approach</li>
+                    <ul>
+                        <li>Central tendency</li>
+                        <li>Uncertainty and 95% CI estimation</li>
+                    </ul>
+                </ol>
+            </section>
+            <section data-auto-animate data-header="Griddy Gibbs Calibration [Conclusion]">
+                <h2>Conclusions</h2>
+                <ol start="2">
+                    <li>The griddy Gibbs approach achieves these estimates with significant computational savings</li>
+                    <ul>
+                        <li>Especially true for larger $n$</li>
+                        <li>Tradeoff in greater memory usage</li>
+                    </ul>
+                </ol>
+            </section>
+        </section>
+
+        <!--<section data-external-replace="includes/outline.html"></section>
+        <section data-external-replace="includes/intro.html"></section>
+        <section data-external-replace="includes/calibration.html"></section>
+        <section data-external-replace="includes/lit_review.html"></section>-->
+        <!--<section data-external-replace="includes/cosim.html"></section>-->
+        <!--<section data-external-replace="includes/griddy_gibbs.html"></section>
+        <section data-external-replace="includes/sensor_opt.html"></section>
+        <section data-external-replace="includes/fatigue.html"></section>
+        <section data-external-replace="includes/conclusions.html"></section>-->
+        <section>
+          <section>
+            <h2>Acknowledgements</h2>
+            <p style="font-size: 20pt;">
+                This work was supported by Clemson University's Virtual Prototyping of Autonomy Enabled Ground Systems (VIPR-GS) under Cooperative Agreement W56HZV-21-2-0001 with the US Army DEVCOM Ground Vehicle Systems Center (GVSC).
+                <br>
+                Disclaimer: Reference herein to any specific commercial company, product, process, or service by trade name, trademark, manufacturer, or otherwise, does not necessarily constitute or imply its endorsement, recommendation, or favoring by the United States Government or the Department of the Army (DoA). The opinions of the authors expressed herein do not necessarily state or reflect those of the United States Government or the DoA and shall not be used for advertising or product endorsement purposes.
+                <br>
+                DISTRIBUTION STATEMENT A. Approved for public release; distribution is unlimited. OPSEC# (Pending, NOT approved for Release)
+            </p>
+          </section>
+        </section>
+        <section>
+          <section data-auto-animate>
+            <h2>References</h2>
+            <ol style="font-size: 16pt;">
+              <li>Silva, F. Fatigue on engine pistons – A compendium of case studies. Engineering Failure Analysis, 13(3), 480-492, (2006).</li>
+              <li>https://www.aa1car.com/library/diesel_piston_damage.htm</li>
+              <li>https://www.renntech.org/topic/21928-boxster-engine-rebuilds/</li>
+              <li>Gonera, M. & Sandin, O. Thermal analysis of a diesel piston and cylinder liner using the inverse heat conduction method. https://odr.chalmers.se/bitstreams/e1b6ffd9-8fc9-4e3f-bebf-06f06f7d263e/download (2015).</li>
+              <li>Du, J. A Wavelet Neural Network Method to Determine Diesel Engine Piston Heat Transfer Boundary Conditions. SAE International Journal of Engines 5, 1740–1746 (2012).</li>
+              <li>Kennedy, M. C. & O’Hagan, A. Bayesian Calibration of Computer Models. Journal of the Royal Statistical Society Series B: Statistical Methodology 63, 425–464 (2001).</li>
+              <li>Higdon, D., Gattiker, J., Williams, B. & Rightley, M. Computer Model Calibration Using High-Dimensional Output. Journal of the American Statistical Association 103, 570–583 (2008).</li>
+              <li>Bayarri, M. J., Berger, J. O. & Liu, F. Modularization in Bayesian analysis, with emphasis on analysis of computer models. Bayesian Analysis 4, 119–150 (2009).</li>
+              <li>Tuo, R. & Jeff Wu, C. F. A Theoretical Framework for Calibration in Computer Models: Parametrization, Estimation and Convergence Properties. SIAM/ASA J. Uncertainty Quantification 4, 767–795 (2016).</li>
+              <li>Huang, J., Gramacy, R. B., Binois, M. & Libraschi, M. On-site surrogates for large-scale calibration. Applied Stochastic Models in Business and Industry 36, 283–304 (2020).</li>
+            </ol>
+          </section>
+          <section data-auto-animate>
+            <h2>References</h2>
+            <ol style="font-size: 16pt;" start="11">
+              <li>Konomi, B. A., Karagiannis, G., Lai, K. & Lin, G. Bayesian Treed Calibration: An Application to Carbon Capture With AX Sorbent. Journal of the American Statistical Association 112, 37–53 (2017).</li>
+              <li>Pratola, M. T. & Higdon, D. M. Bayesian Additive Regression Tree Calibration of Complex High-Dimensional Computer Models. Technometrics 58, 166–179 (2016).</li>
+              <li>Jo, T., Koo, B., Kim, H., Lee, D. & Yoon, J. Y. Effective sensor placement in a steam reformer using gappy proper orthogonal decomposition. Applied Thermal Engineering 154, 419–432 (2019).</li>
+              <li>Holland, D. E., Castanier, M. P., Ceccio, S. L., Epureanu, B. I. & Filippi, S. Testing and calibration procedures for mistuning identification and traveling wave excitation of blisks. https://asmedigitalcollection.asme.org/gasturbinespower/article-abstract/132/4/042502/476514 (2010).</li>
+              <li>Kammer, D. C. Sensor placement for on-orbit modal identification and correlation of large space structures. Journal of Guidance, Control, and Dynamics 14, 251–259 (1991).</li>
+              <li>Penny, J. E. T., Friswell, M. I. & Garvey, S. D. Automatic choice of measurement locations for dynamic testing. AIAA Journal 32, 407–414 (1994).</li>
+              <li>Guida, M. & Penta, F. A Bayesian analysis of fatigue data. Structural Safety 32, 64–76 (2010).</li>
+              <li>Liu, X.-W., Lu, D.-G. & Hoogenboom, P. C. Hierarchical Bayesian fatigue data analysis. International Journal of Fatigue 100, 418–428 (2017).</li>
+              <li>Karolczuk, A. & Słoński, M. Application of the Gaussian process for fatigue life prediction under multiaxial loading. Mechanical Systems and Signal Processing 167, 108599 (2022).</li>
+            </ol>
+          </section>
+          <section data-auto-animate>
+            <h2>References</h2>
+            <ol style="font-size: 16pt;" start="20">
+              <li>Liu, X.-W. & Lu, D.-G. Survival analysis of fatigue data: Application of generalized linear models and hierarchical Bayesian model. International Journal of Fatigue 117, 39–46 (2018).</li>
+              <li>Feng, F. et al. Probabilistic fatigue life prediction in additive manufacturing materials with a physics-informed neural network framework. Expert Systems with Applications 275, 127098 (2025).</li>
+              <li>Chiachío, M., Chiachío, J., Rus, G. & Beck, J. L. Predicting fatigue damage in composites: A Bayesian framework. Structural Safety 51, 57–68 (2014).</li>
+              <li>Frie, C., Kolyshkin, A., Mordeja, S., Riza Durmaz, A. & Eberl, C. Reduction of testing effort for fatigue tests: Application of Bayesian optimal experimental design. Fatigue & Fracture of Engineering Materials & Structures 46, 4783–4800 (2023).</li>
+              <li>Klemenc, J. & Nagode, M. Design of step-stress accelerated life tests for estimating the fatigue reliability of structural components based on a finite-element approach. Fatigue & Fracture of Engineering Materials & Structures 44, 1562–1582 (2021).</li>
+              <li>1. Ahlqvist, M., Weddfelt, K., Norman, V. & Leidermark, D. Probabilistic evaluation of the Step-Stress fatigue testing method considering cumulative damage. Probabilistic Engineering Mechanics 74, 103535 (2023).</li>
+              <li>Magazzeni, C. M., Rose, R., Gearhart, C., Gong, J. & Wilkinson, A. J. Bayesian optimized collection strategies for fatigue strength testing. Fatigue & Fracture of Engineering Materials & Structures 46, 228–243 (2023).</li>
+            </ol>
+          </section>
+          <section data-auto-animate>
+            <h2>References</h2>
+            <ol style="font-size: 16pt;" start="27">
+              <li>Ravikumar, A., Gainey B., Korivi, V., Gingrich, E., Tess, M., Piehl, J., & Lawler, B. Diesel Combustion Modification to Reduce Piston Thermal Loads: A Numerical Study Using 3-D Sector Mesh CFD. In Internal Combustion Engine Division Fall Technical Conference, vol. 89305, p. V001T06A009. American Society of Mechanical Engineers, (2025).</li>
+              <li>Ravikumar, A., Gainey B., Gingrich, E., Korivi, V., Tess, M., Piehl, J., & Lawler, B. An Improved CFD Wall Heat Transfer Model Based on a Critical Analysis in Heavy-duty Diesel Engines. Available at SSRN 6408959. </li>
+              <li>Gingrich, E. et al. Evaluation of high-temperature martensitic steels for heavy-duty diesel piston applications. SAE Technical Paper Series 2022, (2022).</li>
+              <!--
+              <li>https://jbloomlab.github.io/dms_variants/_images/dms_variants-ispline-3.png</li>
+              <li>https://jbloomlab.github.io/dms_variants/_images/dms_variants-ispline-1.png</li>
+              -->
+            </ol>
+          </section>
+        </section>
+			</div>
+		</div>
+
+
+		<script src="dist/reveal.js"></script>
+		<script src="dist/plugin/notes.js"></script>
+		<script src="dist/plugin/markdown.js"></script>
+		<script src="dist/plugin/highlight.js"></script>
+		<script src="dist/plugin/math.js"></script>
+    <script src="dist/plugin/zoom.js"></script>
+		<script src="node_modules/reveal.js-menu/menu.js"></script>
+    
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				slideNumber: true,
+        pdfMaxPagesPerSlide: 1,
+        pdfSeparateFragments: false,
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes, RevealMath.KaTeX, RevealMenu, RevealZoom ],
+        dependencies: [
+          //{ src: 'plugin/markdown/markdown.js' },
+          //{ src: 'plugin/markdown/marked.js' },
+          //{ src: 'plugin/notes/notes.js' },
+          //{ src: 'plugin/highlight/highlight.js' },
+          //{ src: 'plugin/math/math.js' },
+          //{ src: 'node_modules/reveal.js-menu/menu.js' },
+          {
+          src: 'node_modules/reveal_external/external/external.js',
+          condition: function() {
+            return !!document.querySelector( '[data-external],[data-external-replace]' );
+          }
+        },]
+			});
+		</script>
+    <script>
+
+      // ===== Generate sinusoidal waveform =====
+
+      function generateSinePath() {
+
+        const startX = 100;
+        const endX = 820;
+        const width = endX - startX;
+
+        const meanY = 240;
+        const amplitude = 60;
+        const cycles = 12;
+
+        const samples = 250;
+
+        let d = "";
+
+        for (let i = 0; i <= samples; i++) {
+
+          const t = i / samples;
+          const x = startX + width * t;
+
+          const y = meanY - amplitude *
+                    Math.sin(2 * Math.PI * cycles * t - Math.PI / 2);
+
+          if (i === 0)
+            d += `M ${x} ${y}`;
+          else
+            d += ` L ${x} ${y}`;
+        }
+
+        return d;
+      }
+
+
+
+
+      </script>
+    <script>
+      // Run whenever slide becomes active
+      Reveal.on("slidechanged", event => {
+
+        const slide = event.currentSlide;
+
+        const sine = slide.querySelector("#sineWave");
+
+        if (sine && !sine.getAttribute("d")) {
+          sine.setAttribute("d", generateSinePath());
+        }
+
+      });
+
+
+      // Also run if this slide is the first slide shown
+      Reveal.on("ready", event => {
+
+        const slide = event.currentSlide;
+
+        const sine = slide.querySelector("#sineWave");
+
+        if (sine) {
+          sine.setAttribute("d", generateSinePath());
+        }
+
+      });
+    </script>
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+    <!--<script type="text/javascript">
+        // 3. On Reveal.js ready event, copy header/footer <div> into each `.slide-background` <div>
+        var header = $('#header').html();
+        if ( window.location.search.match( /print-pdf/gi ) ) {
+            Reveal.addEventListener( 'ready', function( event ) {
+                $('.slide-background').append(header);
+            });
+        }
+        else {
+            $('div.reveal').append(header);
+      }
+    </script>
+  -->
+    <script>
+      var header = $('#header').prop('outerHTML');
+      var opsec = $('#header-right').prop('outerHTML');
+
+      Reveal.on('ready', function () {
+          if (window.location.search.match(/print-pdf/gi)) {
+              $('.slide-background').append(header);
+              const slides = document.querySelectorAll('.slides section');
+              const headers = document.querySelectorAll('.slide-background .header-title');
+              //const opsec = document.querySelectorAll('.slide-background .header-opsec');
+
+              let currentHeader = "";
+
+              slides.forEach((slide, i) => {
+                  if (slide.dataset.header)
+                      currentHeader = slide.dataset.header;
+                  headers[i].textContent = currentHeader;
+              });
+          } else {
+              $('div.reveal').append(header);
+              updateHeader(Reveal.getCurrentSlide());
+              //$('div.reveal').append(opsec);
+              //appendOpsec(Reveal.getCurrentSlide());
+          }
+      });
+
+      Reveal.on('slidechanged', function(event) {
+          updateHeader(event.currentSlide);
+      });
+
+      function updateHeader(slide) {
+
+          // Find the closest ancestor section (important for vertical slides)
+          let s = slide;
+
+          while (s && !s.dataset.header) {
+              s = s.parentElement.closest('section');
+          }
+
+          const title = s?.dataset.header || "";
+
+          document.querySelectorAll('.header-title').forEach(el => {
+              el.textContent = title;
+          });
+      }
+
+      function appendOpsec(slide) {
+        let s = slide;
+
+        const title = "DISTRIBUTION STATEMENT A. Approved for public release; distribution is unlimited. OPSEC# (Pending, NOT approved for Release)";
+
+        document.querySelectorAll('.header-opsec').forEach(el => {
+            el.textContent = title;
+        });
+      }
+    </script>
+	</body>
+</html>

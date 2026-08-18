@@ -1,0 +1,311 @@
+/* VIPR reveal.js theme */
+
+/* Import a clean sans font */
+@import url(./dist/theme/fonts/source-sans-pro/source-sans-pro.css);
+
+:root {
+  /*--backblue: #394957;
+  --lightsilver: #ebedf0;
+  --corange: #f36f20;*/
+  --orange1: rgb(245,102,0);
+  --white1: rgb(255,255,255);
+  --purp1: rgb(82,45,128);
+  --gray1: rgb(140,130,121);
+  --gray2: rgb(51,51,51);
+  --purp2: rgb(46,26,71);
+  --orange2: rgb(185,71,0);
+  --oki1: #000000;
+  --oki2: #0072B2;
+  --oki3: #D55E00;
+  --oki4: #009E73;
+  --oki5: #CC79A7;
+  --oki6: #E69F00;
+  --oki7: #56B4E9;
+  --oki8: #F0E442;
+
+}
+
+/* Base slide background and text */
+.reveal {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--white1);
+  color: var(--purp2);
+}
+
+/* Figures and Captions */
+.reveal .slides{
+    counter-reset: fig;
+}
+
+.reveal .slides figure {
+    counter-increment: fig;
+    display: inline-block;
+    margin: 1em auto;
+    text-align: center;
+    font-size: 0.65em;
+    margin-top: 0em;
+    justify-content: center;
+}
+
+.reveal .figcols {
+    display: flex;
+    justify-content: center;
+    gap: 1em;
+    margin-top: 0em;
+}
+
+.reveal .slides p{ text-align: justify;}
+.reveal .slides { text-align: left;}
+.reveal .slides h2{ text-align: center;}
+
+.reveal .slides figcaption::before {
+    content: "Figure: ";
+    color: var(--purp2);
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+    margin-top: 0.4em;
+}
+.reveal .slides figcaption{
+    color: var(--purp2);
+    text-align: center;
+    font-style: italic;
+    font-size: 20pt;
+}
+
+/* Headings */
+/*.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h5,
+.reveal h6,
+.reveal h4 {
+  color: var(--lightsilver);
+}
+  */
+
+#header {
+  position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    /*background: var(--purp2);*/
+    color: var(--white1);
+    background-color: var(--purp2);
+    font-size: 16pt;
+    z-index: 5;
+}
+
+#header-left {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    /*background: var(--purp2);*/
+    color: var(--white1);
+    background-color: var(--purp2);
+    font-size: 16pt;
+    z-index: 10;
+}
+
+#header-right {
+    position: absolute;
+    top: 10%;
+    left: 0%;
+    width: 100%;
+    /*background: var(--purp2);*/
+    color: var(--white1);
+    /*background-color: var(--purp2);*/
+    font-size: 8pt;
+    text-align: right;
+    z-index: 12;
+}
+
+.top1 {
+    /*background: url(../../images/background_bar_h100.png) top left repeat-x;*/
+    /*background: var(--purp2);*/
+    background-color: var(--purp2);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3.5%;
+    z-index: 1;
+}
+.top2 {
+    /*background: url(../../images/background_bar_h100.png) top left repeat-x;*/
+    /*background: var(--purp2);*/
+    background-color: var(--white1);
+    position: absolute;
+    top: 3.5%;
+    left: 0;
+    width: 100%;
+    height: 0.5%;
+    z-index: 1;
+}
+.top3 {
+    /*background: url(../../images/background_bar_h100.png) top left repeat-x;*/
+    /*background: var(--purp2);*/
+    background-color: var(--orange1);
+    position: absolute;
+    top: 4%;
+    left: 0;
+    width: 100%;
+    height: 0.5%;
+    z-index: 1;
+}
+.bot1 {
+    /*background: url(../../images/background_bar_h100.png) top left repeat-x;*/
+    /*background: var(--purp2);*/
+    background-color: var(--purp2);
+    position: absolute;
+    top: 98%;
+    left: 0;
+    width: 100%;
+    height: 2%;
+    z-index: 1;
+}
+
+.reveal h1 {
+  color: var(--orange1);
+}
+
+.reveal h2 {
+  color: var(--orange2);
+}
+
+.reveal h3.subtitle {
+    color: var(--purp1);
+}
+.reveal h4 {
+    color: var(--gray1);
+    text-align: center;
+}
+
+.reveal .slides h6 {
+  position: absolute;
+  top: 0em;
+  left: 0em;
+  color: var(--orange1);
+}
+
+
+/* Titles */
+.reveal .title {
+  color: var(--orange1);
+}
+.reveal .subtitle {
+  color: var(--gray1);
+}
+.reveal .author,
+.reveal .date {
+  color: var(--purp2);
+}
+
+/* Lists and items */
+.reveal ul li {
+  color: var(--purp1);
+}
+.reveal ul li::marker {
+  color: var(--purp1);
+}
+.reveal ol li {
+  color: var(--purp2);
+}
+.reveal ol li::marker {
+  color: var(--purp2);
+}
+
+/* Blocks */
+.block {
+  background: rgba(235, 237, 240, 0.1);
+  border-left: 4px solid var(--orange1);
+  padding: 1em;
+  margin: 1em 0;
+}
+.alertblock {
+  background: rgba(243, 111, 32, 0.15);
+  border-left: 4px solid var(--orange1);
+  padding: 1em;
+}
+.exampleblock {
+  background: rgba(235, 237, 240, 0.2);
+  border-left: 4px solid var(--purp2);
+  padding: 1em;
+}
+
+/* Frametitling style (imitates Beamer bar) */
+.reveal .slide-header {
+  background-color: var(--purp1);
+  color: var(--white1);
+  text-align: center;
+  padding: 0.3em;
+  border-bottom: 2px solid var(--orange1);
+}
+
+/* Footline (if you use a footer plugin) */
+.reveal .slide-footer {
+  background-color: var(--purp1);
+  color: var(--purp2);
+  text-align: center;
+  padding: 0.3em;
+  border-top: 2px solid var(--corange);
+}
+
+/* Center this block vertically like normal Reveal slides */
+.reveal .vipr-centered {
+    display: flex;
+    align-items: center;   /* vertical centering */
+    justify-content: center; /* horizontal centering */
+    flex-direction: column;
+    height: 400px;          /* let it fill the slide */
+    margin-bottom: 0.5em;
+  }
+
+/* Let sections use the full slide height for our calc() to work */
+/*.reveal section { height: 100%; }
+
+/* Scrollable viewport for tall images */
+.reveal section .vipr-scroll {
+  /* leave room for a heading; tweak 3.2em to match your h2 size */
+  height: 100%;
+  width: 80%;
+  overflow: auto;
+  margin: 0 auto;
+
+  border: 2px solid rgba(255,255,255,.2);
+  border-radius: 12px;
+  padding: .5rem;
+
+}
+
+/* Make the image fill width but keep aspect ratio */
+.reveal section .vipr-scroll img {
+  display: block;
+  width: 100%;
+  height: auto;     /* preserves aspect ratio */
+  max-width: none;  /* IMPORTANT: override Reveal’s defaults */
+}
+
+/* Override Reveal’s global img max-height shrink */
+.reveal img {
+  max-height: none !important;
+}
+
+.img-overlay-wrap {
+  position: relative;
+  display: inline-block;
+}
+
+/*
+.img-overlay-wrap img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+*/
+.img-overlay-wrap svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
