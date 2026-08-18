@@ -1,0 +1,63 @@
+<script type="text/tikz">
+  \usetikzlibrary{shapes.geometric, arrows}
+
+  \definecolor{blue1}{RGB}{225, 229, 255}
+  \definecolor{blackborder}{RGB}{0, 0, 0}
+  \definecolor{textmain}{RGB}{0, 0, 0}
+  \definecolor{red1}{RGB}{255, 229, 228}
+  \definecolor{yel1}{RGB}{255, 246, 226}
+  \definecolor{green1}{RGB}{229, 254, 224}
+  \definecolor{gray2}{RGB}{162, 177, 195}
+
+  \tikzstyle{trap1} = [trapezium, trapezium left angle=70, trapezium right angle=110, minimum width=3cm, minimum height=1cm, text centered, font=\normalsize, color=textmain, draw=blackborder, line width=1, fill=blue1, align=center]
+  \tikzstyle{rect1} = [rectangle, rounded corners, minimum width=3cm, minimum height=1cm, text centered, font=\normalsize, color=textmain, draw=blackborder, line width=1, fill=red1, align=center]
+  \tikzstyle{rect2} = [rectangle, minimum width=3cm, minimum height=1cm, text centered, font=\normalsize, color=textmain, draw=blackborder, line width=1, fill=yel1, align=center]
+  \tikzstyle{diamond1} = [diamond, minimum width=3cm, minimum height=1cm, text centered, font=\normalsize, color=textmain, draw=blackborder, line width=1, fill=green1, align=center]
+  \tikzstyle{arrow1} = [thick, draw=gray2, line width=2, ->]
+  \tikzstyle{line1} = [thick, draw=gray2, lin width=2, --]
+
+  \begin{tikzpicture}[node distance=2cm]
+    \node (hazard_model) [trap1, xshift=0cm] {Cox Hazard Model \\
+      $\lambda[n|s(n),\lambda_0,g] = \lambda_0(n)\exp\{g[s(n)]\}$
+    };
+
+    \node (baseline) [rect1, xshift=-2cm, above of=hazard_model] {Baseline hazard function\\
+      $\Lambda_0(n) = \sum_{i=1}^{p_{\gamma}} \gamma_i I_i^{\gamma}(n|k_{\gamma},\boldsymbol{\xi}_{\gamma})$ \\
+      $\lambda_0(n) = \sum_{i=1}^{p_{\gamma}} \gamma_i M_i^{\gamma}(n|k_{\gamma},\boldsymbol{\xi}_{\gamma})$
+    };
+    \node (risk) [rect1, xshift=3.5cm, above of=hazard_model] {Risk function\\
+      $g[s(n)] = \sum_{i=1}^{p_{\beta}} \beta_i M_i^{\beta}(s(n)|k_{\beta},\boldsymbol{\xi}_{\beta})$
+    };
+
+    \node (splines) [diamond1, xshift=-2cm, above of=risk] {M/I Splines};
+    \node (lik) [diamond1, xshift=3cm, below of=hazard_model,yshift=-0.75cm] {Hazard likelihood\\
+      $L(\mathbf{N}|\mathbf{s}(n),\boldsymbol{\gamma},\boldsymbol{\beta})$
+    };
+    \node (init_data) [rect2, right of=hazard_model,xshift=3.5cm] {Existing data\\
+      $N_1,\ldots,N_m$\\
+      $s_1(n),\ldots,s_m(n)$
+    };
+    \node (post) [rect1, below of=lik,yshift=-1cm] {Draw posterior samples of $\boldsymbol{\gamma}$ and $\boldsymbol{\beta}$};
+    \node (eval_model) [rect1, below of=post, xshift=-3cm] {Evaluate posterior model};
+    \node (entropy) [rect1, below of=post, xshift=4cm] {Entropy-based optimal design\\
+      $O^*(\mathbf{d})$
+    };
+    \node (test_point) [rect2, below of=entropy] {Evaluate next test point, $\mathbf{d}^*$};
+    \node (predict) [rect2, below of=eval_model] {Predict fatigue life\\
+      $F_N(n|s(n))$
+    };
+
+    \draw [arrow1, bend right] (splines) to (baseline);
+    \draw [arrow1, bend left] (splines) to (risk);
+    \draw [arrow1, bend left=15] (baseline) to (hazard_model);
+    \draw [arrow1, bend right=15] (risk) to (hazard_model);
+    \draw [arrow1, bend right] (hazard_model) to (lik);
+    \draw [arrow1, bend left] (init_data) to (lik);
+    \draw [arrow1] (lik) -- (post);
+    \draw [arrow1, bend right] (hazard_model) to (eval_model);
+    \draw [arrow1, bend left] (post) to (eval_model);
+    \draw [arrow1] (eval_model) -- (entropy);
+    \draw [arrow1] (eval_model) -- (predict);
+    \draw [arrow1] (entropy) -- (test_point);
+  \end{tikzpicture}
+</script>

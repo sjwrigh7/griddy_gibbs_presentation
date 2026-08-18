@@ -1,0 +1,400 @@
+<section>
+    <section>
+        <h1>Literature Review</h1>
+    </section>
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Review</h2>
+        <h4 class="subtitle">Piston model calibration</h4>
+        <!--
+        <ol>
+            <li>Gonera used the inverse heat conduction method [4]</li>
+            <li>Du used wavelet neural networks [5]</li>
+        </ol>
+        -->
+        <table style="font-size: 20pt;">
+            <thead>
+                <tr>
+                <th>Authors (year)</th>
+                <th>Contribution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Gonera (2015) [4]</td>
+                    <td>Inverse heat conduction-based optimization to estimate boundary conditions</td>
+                </tr>
+                <tr>
+                    <td>Du (2012) [5]</td>
+                    <td>Neural network-based calibration of boundary conditions</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Review</h2>    
+        <h4>Bayesian Model Calibration</h4>
+        <!--
+        <ol>
+            <li>Kennedy and O'Hagan developed a Bayesian model calibration method [6]</li>
+            <li>Multivariate formulation by Higdon et al. [7]</li>
+            <li>Modular approach proposed by Bayarri, Berger, and Liu [8]</li>
+            <li>Tuo and Wu showed the identifiability issues related to the discrepancy term [9]</li>
+        </ol>
+        -->
+        <table style="font-size: 18pt;">
+            <thead>
+                <tr>
+                <th>Authors (year)</th>
+                <th>Contribution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kennedy & O'Hagan (2001) [6]</td>
+                    <td>Bayesian model calibration paradigm</td>
+                </tr>
+                <tr>
+                    <td>Higdon et al. (2008) [7]</td>
+                    <td>Multivariate response formulation of Bayesian model calibration</td>
+                </tr>
+                <tr>
+                    <td>Bayarri, Berger, & Liu (2009) [8]</td>
+                    <td>Modularized approach for Bayesian model calibration</td>
+                </tr>
+                <tr>
+                    <td>Tuo & Wu (2016) [9]</td>
+                    <td>Theoretical analysis of model discrepancy identifiability issues</td>
+                </tr>
+                <tr>
+                    <td>Huang et al. (2020) [10]</td>
+                    <td>On-site surrogate modeling for Bayesian model calibration</td>
+                </tr>
+                <tr>
+                    <td>Konomi (2017) [11]</td>
+                    <td>Bayesian tree approach for Bayesian model calibration</td>
+                </tr>
+                <tr>
+                    <td>Pratola & Higdon (2016) [12]</td>
+                    <td>Bayesian additive regression tree approach with partitioned model discrepancy</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!--
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Review</h2>    
+        <h4>Bayesian Model Calibration</h4>
+        <ol start="5">
+            <li>Huang et al. improved performance by using on-site surrogates [10]</li>
+            <li>Konomi used a Bayesian tree approach [11]</li>
+            <li>Pratola and Higdon used a Bayesian additive regression tree approach with a novel discrepancy term implementation [12]</li>
+        </ol>
+    </section>
+    -->
+
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Gaps</h2>
+        <h4 class="subtitle">Bayesian calibration of piston models</h4>
+        <ol style="font-size: 24pt;">
+            <li><b>No previous publications on calibration of piston model heat transfer boundary conditions quantify the uncertainty of their estimates</b></li>
+            <li><b>There is an inherent lack of computational efficiency for Bayesian model calibration</b></li>
+            <li><b>Identifiability issues due to the discrepancy term</b></li>
+            <!--<li><b>Current MCMC sampling schemes for Bayesian model calibration depend on appropriate Metropolis-Hastings step sizes</b></li>-->
+        </ol>
+    </section>
+
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Review</h2>
+        <h4>Sensor optimization for model calibration</h4>
+        <!--
+        <ol>
+            <li>Jo et al. used a genetic algorithm to find optimal sensor locations for field data reconstruction with gappy proper orthogonal decomposition [13]</li>
+            <li>Holland et al. [14], Kammer [15], and Penny, Friswell, and Garvey [16] used Fisher information D-optimality to optimize sensor location for modal identification</li>
+        </ol>
+        -->
+        <table style="font-size: 20pt;">
+            <thead>
+                <tr>
+                <th>Authors (year)</th>
+                <th>Contribution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Jo et al. (2019) [13]</td>
+                    <td>Genetic algorithm approach for optimal experiment design</td>
+                </tr>
+                <tr>
+                    <td>Holland et al. (2010) [14]; Kammer (1991) [15]; Penny, Friswell, & Garvey (1994) [16]</td>
+                    <td>Fisher information-based optimization of sensor locations</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Gaps</h2>
+        <h4 class="subtitle">Sensor optimization for model calibration</h4>
+        <ol start="4" style="font-size: 24pt;">
+            <li><b>The computational cost of Fisher information-based optimization becomes impractical for computationally expensive computer models</b></li>
+            <li><b>There is little research in efficient domain exploration and exploration of complicated domains (like the piston geometry) for optimal design approaches</b></li>
+        </ol>
+    </section>
+
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Review</h2>
+        <h4 class="subtitle">Piston fatigue analysis</h4>
+        <!--
+        <p>Constant loading amplitude</p>
+        <ol>
+            <li>Guida and Penta [17] and Liu et al. [18] used Bayesian analysis of fatigue data.</li>
+            <li>Karolczuk and Stonski used a Gaussian process to achieve non-parametric estimation of $S$-$N$ curves [19]</li>
+            <li>Liu and Lu used a survival analysis approach to model fatigue data [20]</li>
+        </ol>
+        -->
+        <table style="font-size: 18pt;">
+            <thead>
+                <tr>
+                <th>Authors (year)</th>
+                <th>Contribution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Guida & Penta (2010) [17] and Liu et al. (2017) [18]</td>
+                    <td>Hierarchical Bayesian analysis of constant load amplitude fatigue data</td>
+                </tr>
+                <tr>
+                    <td>Karolczuk & Stonski (2022) [19]</td>
+                    <td>Non-parametric estimation of $S$-$N$ curves via Gaussian process regression with constant load amplitude data</td>
+                </tr>
+                <tr>
+                    <td>Liu & Lu (2018) [20]</td>
+                    <td>Survival modeling analysis of constant load amplitude fatigue data</td>
+                </tr>
+                <tr>
+                    <td>Feng et al. (2025) [21]</td>
+                    <td>Non-parametric estimation of $S$-$N$ curves via physics-informed neural network for constant load amplitude fatigue data</td>
+                </tr>
+                <tr>
+                    <td>Chiachio et al. (2014) [22]</td>
+                    <td>Non-parametric estimation of fatigue life via markov modeling for constant load amplitude fatigue data</td>
+                </tr>
+                <tr>
+                    <td>Frie et al. (2023) [23]</td>
+                    <td>Bayesian optimal experiment design to select constant amplitude test designs for a parametric $S$-$N$ model</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!--
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Review</h2>
+        <h4 class="subtitle">Piston fatigue analysis</h4>
+        <p>Constant loading amplitude</p>
+        <ol start="4">
+            <li>Feng et al used a physics-informed neural network to estimate probabilistic $S$-$N$ curves [21]</li>
+            <li>Chiachio et al. used a Markov chain framework to non-parametrically estimate fatigue damage and failure [22]</li>
+        </ol>
+    </section>
+
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Review</h2>
+        <h4 class="subtitle">Piston fatigue analysis</h4>
+        <p>Constant loading amplitude</p>
+        <ol start="6">
+            <li>Frie et al. used Bayesian optimal experiment design to select constant amplitude test designs for a parametric model [23]</li>
+        </ol>
+    </section>
+    -->
+
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Review</h2>
+        <h4>Piston fatigue analysis</h4>
+        <!--
+        <p>Variable loading amplitude</p>
+        <ol>
+            <li>Klemenc and Nagode [24] and Ahlqvist et al.[25] presented methods for analyzing variable load amplitude fatigue data </li>
+            <li>Magazzeni et al. used Bayesian optimal experiment design to design variable load amplitude tests for a parametric model [26]</li>
+        </ol>
+        -->
+        <table style="font-size: 20pt;">
+            <thead>
+                <tr>
+                <th>Authors (year)</th>
+                <th>Contribution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Klemenc & Nagode (2021) [24] and Ahlqvist et al. (2023) [25]</td>
+                    <td>Analysis of variable load amplitude fatigue test data</td>
+                </tr>
+                <tr>
+                    <td>Magazzeni et al. (2023) [26]</td>
+                    <td>Bayesian optimal experiment design of variable load amplitude tests for a parametric $S$-$N$ curve and cumulative damage model</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <section data-header="Literature Review and Gaps" data-auto-animate>
+        <h2>Literature Gaps</h2>
+        <h4>Piston fatigue analysis</h4>
+        <ol start="6">
+            <li><b>None of the reviewed literature considers flexible estimation of the $S$-$N$ curve <em>and</em> the cumulative damage model</b></li>
+            <li><b>Previous optimal experiment design literature focuses on parametric models and/or constant load amplitude tests</b></li>
+            <li><b>Current accelerated fatigue testing approaches consider only monotonically increasing stresses</b></li>
+        </ol>
+    </section>
+
+    <section data-header="Research Objectives">
+        <h2>Research Objectives</h2>
+        <table style="font-size: 18pt;">
+            <thead>
+                <tr>
+                <th>Objective</th>
+                <th>Gaps Addressed</th>
+                <th>Proposed Solution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">Development of an efficient Bayesian model calibration algorithm using griddy Gibbs sampling</td>
+                    <td>1</td>
+                    <td>Bayesian model calibration of a piston heat transfer model to quantify uncertainty</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Griddy Gibbs sampling to increase computational efficiency and circumvent Metropolis-Hastings updates</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Integrated discrepancy term to aid with numerical stability and identifiability</td>
+                </tr>
+                <tr></tr>
+            </tbody>
+        </table>
+        <aside class="notes">
+            My first research objective is to develop an efficient...<br>
+            By using a Bayesian model calibration of piston...<br>
+            I adress the gap in unccertainty quantification of piston boundary condition estimates<br>
+            By using griddy Gibbs sampling to improve computational efficiency...<br>
+            I address the gap of computational cost of Bayesian model calibration<br>
+            By using an integrated discrepancy term for improved numerical stability<br>
+            I address the gap of identifiability problems caused by model discrepancy
+        </aside>
+    </section>
+
+    <section data-header="Research Objectives">
+        <h2>Research Objectives</h2>
+        <table style="font-size: 18pt;">
+            <thead>
+                <tr>
+                <th>Objective</th>
+                <th>Gaps Addressed</th>
+                <th>Proposed Solution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="2">Optimization of sensor locations for piston testing</td>
+                    <td>4</td>
+                    <td>Computationally efficient Fisher-information optimization via surrogate modeling and one-at-a-time optimization</td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Mapping of piston geometry via finite element mesh and efficient exploration via genetic algorithm</td>
+                </tr>
+                <tr></tr>
+            </tbody>
+        </table>
+        <aside class="notes">
+            My second research objective is to develop an approach for optimization...<br>
+            By using a two-phase optimization scheme based on one-at-a-time optimization<br>
+            I address the gap of computational efficiency for Fisher information-based optimization criteria<br>
+            By utilizing a genetic algorithm and mapping proposed locations to the piston's finite element mesh<br>
+            I address the gap of efficient exploration of complicated optimization spaces
+        </aside>
+    </section>
+
+    <section data-header="Research Objectives">
+        <h2>Research Objectives</h2>
+        <table style="font-size: 18pt;">
+            <thead>
+                <tr>
+                <th>Objective</th>
+                <th>Gaps Addressed</th>
+                <th>Proposed Solution</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td rowspan="3">Optimal experiment design for non-parametric fatigue models</td>
+                    <td>6</td>
+                    <td>Flexible, non-parametric estimation of $S$-$N$ curve and cumulative damage model via Cox proportional hazards model</td>
+                </tr>
+                <tr>
+                    <td>7</td>
+                    <td>Optimal design of variable load amplitude tests with a non-parametric data model</td>
+                </tr>
+                <tr>
+                    <td>8</td>
+                    <td>Improved accelerated fatigue testing with increasing and decreasing stresses over cycles</td>
+                </tr>
+                <tr></tr>
+                
+            </tbody>
+        </table>
+        <aside class="notes">
+            My third research objective is to develope a framework for optimal experiment...<br>
+            By using a flexible survival model<br>
+            I address the gaps in simultaneous non-parametric estimation of S-N curve and cumulative damage models<br>
+            By performing optimal experiment design for variable load amplitude tests<br>
+            I address the gaps in optimal design of variable load amplitude tests for non-parametric models<br>
+            By allowing more flexible test designs with increasing and decreasing stresses<br>
+            I adress the gap in test designs
+        </aside>
+    </section>
+
+    <!--
+    <section data-header="Introduction [Research Objectives]" data-auto-animate>
+        <h2>Research Objectives</h2>
+        <ol style="font-size: 28pt;">
+            <li>Development of an efficient Bayesian model calibration algorithm</li>
+            <ol style="list-style-type: lower-roman">
+                <li>Griddy Gibbs sampling scheme for improved computational efficiency</li>
+                <li>Integrated discrepancy for improved stability</li>
+                <li>Circumvent concerns about Metropolis-Hastings step sizes by use of griddy Gibbs updates</li>
+            </ol>
+        </ol>
+    </section>
+
+    <section data-header="Introduction [Research Objectives]" data-auto-animate>
+        <h2>Research Objectives</h2>
+        <ol start="2" style="font-size: 28pt;">
+            <li>Optimization of sensor location in a piston</li>
+            <ol style="list-style-type: lower-roman">
+                <li>Minimization of asymptotic variance of calibrated parameter estimates</li>
+                <li>Efficient exploration of optimization space with a genetic algorithm</li>
+                <li>Efficient fitness calculation for genetic algorithm</li>
+            </ol>
+        </ol>
+    </section>
+
+    <section data-header="Introduction [Research Objectives]" data-auto-animate>
+        <h2>Research Objectives</h2>
+        <ol start="3" style="font-size: 28pt;">
+            <li>Fatigue data analysis</li>
+            <ol style="list-style-type: lower-roman">
+                <li>Non-parametric modeling of both $S$-$N$ curve and cumulative damage mechanism</li>
+                <li>Bayesian optimal experiment design of variable load amplitude data for non-parametric model</li>
+                <li>Alternative variable load amplitude testing with decreasing stress over time</li>
+            </ol>
+        </ol>
+    </section>
+    -->
+</section>

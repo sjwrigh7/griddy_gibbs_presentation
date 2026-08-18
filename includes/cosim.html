@@ -1,0 +1,138 @@
+<section>
+    <section>
+        <h1>Piston FEA-CFD Co-Simulation</h1>
+    </section>
+    
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="figure" style="width:95%; height: auto;">
+            <img src="assets/figures/cosim/cosim_flowchart.png">
+            <figcaption>Co-simualtion process</figcaption>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>CFD Model</h2>
+        Details of CFD modeling described in the work of Ravikumar [27,28]
+        <!--
+        <table>
+            <thead>
+                <tr>
+                <th>Component</th>
+                <th>Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Spray break-up</td>
+                    <td>Kelvin-Helmholtz and Rayleigh-Taylor</td>
+                </tr>
+                <tr>
+                    <td>Evaporation</td>
+                    <td>Frossling</td>
+                </tr>
+                <tr>
+                    <td>Turbulence</td>
+                    <td>O'Rourke</td>
+                </tr>
+                <tr>
+                    <td>Collision</td>
+                    <td>No-time-counter</td>
+                </tr>
+                <tr>
+                    <td>Drop drag</td>
+                    <td>Dynamic</td>
+                </tr>
+                <tr>
+                    <td>Spray-wall</td>
+                    <td>Wall film</td>
+                </tr>
+                <tr>
+                    <td>Wall splash</td>
+                    <td>O'Rourke</td>
+                </tr>
+            </tbody>
+        </table>
+        -->
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>CFD Results Mapping</h2>
+        <div class="figcols">
+            <div style="width: 70%;">
+                The CFD output was used as mapped fields in ABAQUS to specify the temperature and
+                 HTC across the crown for a convection BC
+            </div>
+            <div class="figure">
+                <img src="assets/figures/cosim/mapping.png">
+            </div>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>Boundary Conditions</h2>
+        <div class="figcols">
+            <div class="figure">
+                <img src="assets/figures/sensor_opt/main2.png">
+            </div>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>Material Properties</h2>
+        <table style="font-size: 24pt;">
+            <thead>
+                <tr>
+                <th>Temperature ($\textrm{K}$)</th>
+                <th>Thermal Conductivity ($\textrm{W}\textrm{m}^{-2}\textrm{K}^{-1}$) [29]</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>294</td>
+                    <td>35.5</td>
+                </tr>
+                <tr>
+                    <td>323</td>
+                    <td>35.5</td>
+                </tr>
+                <tr>
+                    <td>373</td>
+                    <td>36.8</td>
+                </tr>
+                <tr>
+                    <td>423</td>
+                    <td>37.1</td>
+                </tr>
+                <tr>
+                    <td>473</td>
+                    <td>37.0</td>
+                </tr>
+                <tr>
+                    <td>523</td>
+                    <td>36.9</td>
+                </tr>
+                <tr>
+                    <td>573</td>
+                    <td>36.6</td>
+                </tr>
+                <tr>
+                    <td>623</td>
+                    <td>36.2</td>
+                </tr>
+                <tr>
+                    <td>673</td>
+                    <td>36.0</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+    <section data-header="Piston Co-Simulation">
+        <h2>Finite Element Mesh</h2>
+        <ul>
+            <li>First order, diffusive, solid tetrahedron elements</li>
+            <li>Nominal element size of 0.7 mm at the crown</li>
+            <li>Nominal element size of 2.5 mm at the skirt</li>
+        </ul>
+    </section>
+</section>

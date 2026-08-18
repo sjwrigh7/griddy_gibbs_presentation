@@ -1,0 +1,213 @@
+<section>
+    <!--existing data-->
+    <section data-header="Fatigue Data Analysis [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <figure style="width:85%; height: auto;">
+                <img src="assets/figures/fatigue/fatigue_flowchart.png">
+            </figure>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="50" y="298" width="142" height="77" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-header="Fatigue Data Analysis [Approach]">
+      <h2>Data Representation</h2>
+      <ul>
+        <li>$N$ cycles to failure for each test: $\mathbf{N} = (N_1,N_2,\ldots,N_m)$</li>
+        <li>Corresponding function of stress over cycles: $\mathbf{s}(n) = (s_1(n),s_2(n),\ldots,s_m(n))$</li>
+      </ul>
+    </section>
+
+  <!--partition-->
+    <section data-header="Fatigue Data Analysis [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <figure style="width:85%; height: auto;">
+                <img src="assets/figures/fatigue/fatigue_flowchart.png">
+            </figure>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="180" y="369" width="169" height="59" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-header="Fatigue Data Analysis [Approach]">
+      <h2>Cycles Partition</h2>
+      Create a grid of cycles, $\boldsymbol{\tau}$ containing
+      <ul>
+        <li>All $\mathbf{N}$</li>
+        <li>Any cycle $n$ where stress changes</li>
+      </ul>
+    </section>
+  <section data-header="Fatigue Data Analysis [Approach]">
+    <h2>Posterior Sampling</h2>
+    <div class="figcols">
+      <div>
+        <ul>
+          <li>Bayes' theorem: 
+            $$\footnotesize \begin{align*}
+            \pi(\boldsymbol{\gamma},\boldsymbol{\beta}|
+            \mathbf{N},\mathbf{s}(n)) \propto  \\
+            \pi(\mathbf{N}|
+            \mathbf{s}(n),\boldsymbol{\gamma},\boldsymbol{\beta}) \times \\
+            \pi(\boldsymbol{\gamma}) 
+            \pi(\boldsymbol{\beta})
+            \end{align*}$$</li>
+          <li>Metropolis-Hastings to sample the spline coefficients: $\boldsymbol{\beta}$ and $\boldsymbol{\gamma}$</li>
+        </ul>
+      </div>
+      <div class="figure" style="width: 120%; height: auto;">
+        <img src="assets/figures/beta_histograms.png">
+        <figcaption>Posterior histograms of $\boldsymbol{\beta}$</figcaption>
+      </div>
+    </div>
+  </section>
+  <section data-header="Fatigue Data Analysis [Approach]">
+    <h2>Optimal Experiment Design</h2>
+    <ol>
+      <li>At the current state, $m$, there are $m$ previous observations</li>
+      <li>Estimate the posterior distributions: $\pi(\boldsymbol{\gamma},\boldsymbol{\beta}|\mathbf{N}^m,\mathbf{s}(n))$</li>
+      <li>Optimize next design point, $\mathbf{d} \in \mathcal{D}$ with objective function $O(\mathbf{d})$, conditioned on the posterior</li>
+      <li>Test at new design point $\mathbf{d}$</li>
+      <li>Set state to $m+1$, append new data, and repeat</li>
+    </ol>
+  </section>
+  <section data-header="Fatigue Data Analysis [Approach]">
+    <h2>Objective Function</h2>
+    <div class="block">
+      We can construct our objective function based on entropy to select the design point $\mathbf{d}$
+      that maximizes the reduction in entropy for the next test point
+    </div>
+  </section>
+  <section data-header="Fatigue Data Analysis [Approach]">
+    <h2>Data Synthesis</h2>
+    <div class="figcols">
+      <div>
+      <ul>
+        <li>Given: $\mathbf{d} = (s_0, \Delta s, n_0)$</li>
+        <li>Sample specimen strength factor: $R \sim 10^{\textrm{N}(0,0.1)}$</li>
+        <li>Iteratively evaluate damage for each cycle count and stress level until $D=1$</li>
+      </ul>
+      </div>
+      <div class="figure" style="width: 120%; height: auto;">
+        <img src="assets/figures/data_synthesis.png">
+        <figcaption>Data synthesis iterative evaluations.</figcaption>
+      </div>
+    </div>
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>$S$-$N$ and Damage Models</h2>
+    <ul>
+      <li>The $S$-$N$ model determines the number of cycles to failure at a given stress level, for constant load amplitude testing</li>
+      <li>The cumulative damage model determines how load sequence of variable load amplitude affect the cycles to failure for a specimen</li>
+    </ul>
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>$S$-$N$ Models</h2>
+    <ul>
+      <li>MMPDS-05 regression curve</li>
+      <li>log-bilinear model</li>
+      <li>Basquin's equation</li>
+    </ul>
+    <p>All modeled to represent the $S$-$N$ curve of AISI 4340 steel at room temperature</p>
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Cumulative Damage Models</h2>
+    <ul>
+      <li>Palmgren-Miner</li>
+      <li>Kwofie-Rhabar</li>
+      <li>Manson-Halford</li>
+      <li>Modified Aeran</li>
+    </ul>
+  </section>
+    <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Palmgren-Miner</h2>
+    <div class="block">
+      $$D = \sum d_i = \sum \frac{n_i}{N_i}$$
+    </div>
+    <ul>
+      <li>First proposed damage model</li>
+      <li>Common due to its simplicity</li>
+      <li>Inaccurate, does not consider effects of loading sequence</li>
+    </ul>
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Kwofie-Rhabar</h2>
+    <div class="block">
+      $$D = \sum_i d_i = \sum_i \frac{n_i}{N_i} \frac{\ln N_i}{\ln N_1}$$
+    </div>
+    <ul>
+      <li>Modification of Palmgren-Miner</li>
+      <li>Adds an interaction coefficient to account for loading sequence</li>
+    </ul>
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Manson-Halford</h2>
+    <div class="block">
+      $$\footnotesize \begin{align*}
+      D = \bigg[ \left[ \left[ \left(\frac{n_1}{N_1}
+        \right)^{\alpha_{1,2}} + \frac{n_2}{N_2}\right]^{\alpha_{2,3}}
+        + \frac{n_3}{N_3} \right]^{\alpha_{3,4}} \\
+        + \cdots +
+        \frac{n_{i-1}}{N_{i-1}} \bigg]^{\alpha_{i-1,i}} + \frac{n_i}{N_i}
+      \end{align*}$$
+    </div>
+    where $\alpha_{i-1,i} = \left(\frac{N_{i-1}}{N_i}\right)^{0.4}$
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Manson-Halford</h2>
+    <ul>
+      <li>Further improvement on the Palmgren-Miner model</li>
+      <li>Recursive interaction affects, better accounting for load sequence</li>
+      <li>Truly non-linear damage model</li>
+    </ul>
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Modified Aeran</h2>
+    <div class="block">
+      $$D_{i+1} = \left|1 - \left[1 - \frac{n_{(i+1),total}}{N_{i+1}} \right]^{\delta_{i+1}} \right|$$
+    </div>
+    where $\delta_i = \frac{-1.25}{\ln N_i}$
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Modified Aeran</h2>
+    and $n_{(i+1),total} = n_{(i+1),eff} + n_{(i+1)}$
+  with $n_{(i+1),eff} = N_{i+1} \left[1 - \left(1 - D_i \right)^{\frac{\mu_{i+1}}{\delta_{i+1}}} \right]$
+  and $\mu_{i+1} = \left(\frac{s_i}{s_{i+1}} \right)^2$
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Modified Aeran</h2>
+    <ul>
+      <li>Also a truly non-linear damage model</li>
+      <li>Dual-exponential form with $\delta_{i+1}$ and $\mu_{i+1}$ to account for loading sequence</li>
+    </ul>
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Study 1</h2>
+    <ul>
+      <li>Generate data from the MMPDS-05 $S$-$N$ curve with the Manson-Halford cumulative damage model</li>
+      <ul>
+        <li>Typical test designs with only positive stress steps</li>
+      </ul>
+      <li>Evaluate the proposed hazard model and traditional models</li>
+    </ul>
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Study 3</h2>
+    <ul>
+      <li>Start with a small initial data set of typical test designs</li>
+      <li>Compare the proposed hazard model's estimated $S$-$N$ curve for two sets of added data</li>
+      <ul>
+        <li>Optimally selected test designs</li>
+        <li>Traditional test designs</li>
+      </ul>
+    </ul>
+  </section>
+  <section data-header="Fatigue Data Analysis [Case Study]">
+    <h2>Study 4</h2>
+    <ul>
+      <li>Use the proposed optimal experiment design procedure to select design points for the proposed hazard model</li>
+      <li>Consider data generated from each combination of $S$-$N$ and cumulative damage model</li>
+    </ul>
+  </section>
+</section>

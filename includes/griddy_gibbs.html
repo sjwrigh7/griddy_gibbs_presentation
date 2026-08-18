@@ -1,0 +1,440 @@
+<section>
+    <section>
+        <h1>Griddy Gibbs Calibration</h1>
+        <h1 class="r-fit-text">An Efficient statistical inference approach for model calibration using griddy gibbs sampling</h1>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Motivation]">
+        <h2>Motivation</h2>
+        The primary drawbacks of Bayesian model calibration
+        <ul>
+            <li>Computational expense</li>
+            <ul>
+                <li>Surrogate model training</li>
+                <li>Surrogate model evaluation during MCMC</li>
+            </ul>
+            <li>Identifiability problems caused by the discrepancy term</li>
+            <!--<li>Sensitivity of the Metropolis-Hastings algorithm to step size</li>-->
+            
+        </ul>
+    </section>
+    
+    <section data-header="Griddy Gibbs Calibration [Motivation]">
+        <h2>Motivation</h2>
+        <div class="figcols">
+            <div style="width:100%;">
+                If the domain and codomain of $g$ were finite...
+                <ul>
+                    <li>Precompute to draw finite samples of the posterior distribution much more efficiently</li>
+                </ul>
+            </div>
+            <div class="figure">
+                <img src="assets/figures/gg/cont_vs_disc.png">
+                <figcaption>Continuous v.s. discrete estimate of posterior</figcaption>
+            </div>
+        </div>
+        <aside class="notes">
+            Computational expense is due to the continuous nature of the computer model inputs and outputs<br>
+            ...
+        </aside>
+    </section>
+
+    <!--sampler-->
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/gg/gg_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="625" y="35" width="274" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Griddy Gibbs sampling</h2>
+        Given data model $f(\mathbf{y}|\theta)$ and prior $\pi(\theta)$
+        <ul>
+            <li>Construct grid of $\theta$: $\theta_1,\theta_2,\ldots,\theta_J$</li>
+            <!--<li>For each $j=1,\ldots,J$, compute $q_j = f(\mathbf{y}|\theta_j)\pi(\theta_j)$</li>
+            <li>For each $j=1,\ldots,J$, compute $p_j = \frac{q_j}{\sum_{k=1}^J q_k}$</li>-->
+            <li>Compute proportional posterior probability, $q_j = f(\mathbf{y}|\theta_j)\pi(\theta_j)$</li>
+            <li>Compute normalized posterior probability, $p_j = \frac{q_j}{\sum_{k=1}^J q_k}$</li>
+            <li>Sample from discrete probabilities $p_1,p_2,\ldots,p_J$</li>
+        </ul>
+        <aside class="notes">
+            ...<br>
+            ...<br>
+            quantity q is proporional posterior posterior probability<br>
+            quantity p is the normalized posterior probability<br>
+        </aside>
+    </section>
+
+    <!--Data Model-->
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/gg/gg_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 400" width="1000" height="400" class="fragment fade-in">
+            <rect x="79" y="163" width="215" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Data Model</h2>
+        We can integrate the discrepancy term from the mean to the covariance
+        $$\footnotesize \mathbf{y} \sim \textrm{MVN}(\mathbf{g} + \boldsymbol{\delta},\sigma^2 \mathbf{I}) \rightarrow \mathbf{y} \sim \textrm{MVN}(\mathbf{g} ,\sigma^2 \mathbf{I} + \boldsymbol{\Sigma})$$
+        <ul>
+            <li>Preserves the accounting for epistemic error</li>
+            <li>Makes the MCMC much more stable in terms of identifiability</li>
+        </ul>
+    </section>
+
+    <!--Select Grid-->
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/gg/gg_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="55" y="300" width="263" height="260" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Formulation of Sampling Grid</h2>
+        The choice of the grid of discrete values of $\theta$ is important.<br>
+        Consider we can only afford to evaluate 20 grid points
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Formulation of Sampling Grid</h2>
+        <div class="figcols">
+            <div style="width: 80%;">
+                If we choose the grid of $\theta$ naively, this will result in a poor estimate
+                of the posterior                
+            </div>
+            <div class="figure">
+                <img src="assets/figures/gg/naive_grid.png">
+            </div>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Formulation of Sampling Grid</h2>
+        <div class="figcols">
+            <div style="width: 80%;">
+                If we choose the grid of $\theta$ wisely, we can get a much better estimate
+            </div>
+            <div class="figure">
+                <img src="assets/figures/gg/improved_grid.png">
+            </div>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Formulation of Sampling Grid</h2>
+        <p style="font-size: 28pt;">Find the approximate upper and lower bounds, $\theta_U$ and $\theta_L$ corresponding to the asymptotes of the likelihood</p>
+        <ol style="font-size: 28pt;">
+            <li>Train a surrogate model, $\eta$, on $g$</li>
+            <li>Find $\widehat{\theta}_{MLE}$ from $L|\eta$</li>
+            <li>Step away from $\widehat{\theta}_{MLE}$ until $\frac{\Delta L|\eta}{\Delta \theta} \approx 0$ </li>
+        </ol>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Evaluation of Asymptotic Bounds</h2>
+        <div class="figcols">
+        <div class="figure">
+            <img src="assets/figures/gg/lik_bounds.png" width="700px;">
+        </div>
+        </div>
+    </section>
+    <!--
+    <section data-header="Griddy Gibbs Calibration [Grid Selection]">
+        <h2>Evaluation of Asymptotic Bounds</h2>
+        <ol>
+            <li>Iterate over $p = 1,\ldots,P$</li>
+            <ol start="2">
+                <li>Set $\boldsymbol{\theta}^0 = \widehat{\boldsymbol{\theta}}_{MLE}$</li>
+                <li>Evaluate $L^0 = L(\cdot|\eta(\boldsymbol{\theta^0}))$</li>
+                <li>Set iterator $k = 1$</li>
+                <ol start="5">
+                    <li>Set $\theta_p^k = \theta_p^{k-1} + \delta$</li>
+                    <li>Set $\theta_1^k,\ldots,\theta_{p-1}^k,\theta_{p+1}^k,\ldots,\theta_P^k = 
+                        \theta_1^{k-1},\ldots,\theta_{p-1}^{k-1},\theta_{p+1}^{k-1},\ldots,\theta_P^{k-1}$
+                    </li>
+                </ol>
+            </ol>
+
+            
+        </ol>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Grid Selection]">
+        <h2>Evaluation of Asymptotic Bounds</h2>
+        <ol start="2">
+            <ol start="4">
+
+                <ol start="7">
+                    <li>Evaluate $L^k(\cdot|\eta(\boldsymbol{\theta}^k))$</li>
+                    <li>Calculate difference, $\Delta L = L^{k-1}(\cdot|\eta(\boldsymbol{\theta}^k)) - L^{k}(\cdot|\eta(\boldsymbol{\theta}^k))$</li>
+                    <li>If $\Delta L > 1\textrm{E-}8$, set $k=k+1$ and repeat from 5</li>
+                    <li>If If $\Delta L \leq 1\textrm{E-}8$, set $\theta_{p,U} = \theta_p^k$</li>
+                </ol>
+            </ol>
+        </ol>
+    </section>
+    -->
+
+    <!--Precompute-->
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/gg/gg_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="309" y="322" width="265" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Likelihood</h2>
+        $$\footnotesize \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi)= \frac{1}{ \sqrt{2\pi \sigma^2|\boldsymbol{\Sigma}^*|}} \exp\left\{-\frac{C(\boldsymbol{\theta},\phi,\rho)}{2\sigma^2}\right\}$$
+        <ul>
+            <li>$\footnotesize C(\boldsymbol{\theta},\phi,\rho)=\{\mathbf{y}-\eta(\mathbf{x}_i,\boldsymbol{\theta})\}^T{\boldsymbol{\Sigma}^*}^{-1}\{\mathbf{y}-\eta(\mathbf{x}_i,\boldsymbol{\theta})\}$</li>
+        </ul>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Precomputation</h2>
+        <ol style="font-size: 24pt;">
+            <li>Precompute $C(\boldsymbol{\theta},\phi,\rho)$</li>
+            <ul>
+                <li>Over selected grid of $\boldsymbol{\theta}$ and grids of $\phi$ and $\rho$</li>
+            </ul>
+            <li>Precompute $|\boldsymbol{\Sigma}^*|$</li>
+            <ul>
+                <li>Over grids of $\phi$ and $\rho$</li>
+            </ul>
+        </ol>
+        <div class="block">
+            Evaluation of the likelihood is trivial when these are precomputed
+        </div>
+    </section>
+    
+    <!--
+    <section data-header="Griddy Gibbs Calibration [Posterior]">
+        <h2>Joint Posterior</h2>
+        $$
+        \begin{align*}
+        \pi(\boldsymbol{\theta},\sigma^2,\rho,\phi| \mathbf{y})\propto \\ 
+        \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) 
+        \pi(\boldsymbol{\theta})\pi(\sigma^2)\pi(\rho)\pi(\phi)
+        \end{align*}
+        $$
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Posterior]">
+        <h2>Full Conditionals</h2>
+        $$
+        \begin{align*}
+            \pi(\boldsymbol{\theta}| \mathbf{y},\sigma^2,\rho,\phi) & \propto 
+            \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) \pi(\boldsymbol{\theta}) \\
+            \pi(\sigma^2|\mathbf{y},\boldsymbol{\theta},\rho,\phi) & \propto \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) \pi(\sigma^2)\\
+            \pi(\rho|\mathbf{y},\boldsymbol{\theta},\sigma^2,\phi) & \propto \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) \pi(\rho) \\
+            \pi(\phi| \mathbf{y}, \boldsymbol{\theta},\sigma^2,\rho) &\propto 
+            \pi(\mathbf{y}| \boldsymbol{\theta},\sigma^2,\rho,\phi) \pi(\phi) 
+        \end{align*}
+        $$
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Posterior]">
+        <h2>Posterior Sampling</h2>
+        <ul>
+            <li>Draw $\sigma^{2(s+1)} \sim \textrm{IG}\left(\frac{n}{2}+\alpha_1, \frac{1}{2}C_{j_1^{(s)},j_2^{(s)},j_3^{(s)}} +\beta_1 \right)$</li>
+            <li>Griddy Gibbs sampling for $\boldsymbol{\theta}$, $\phi$, and $\rho$</li>
+        </ul>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Posterior]">
+        <h2>Posterior Sampling</h2>
+        Draw $\boldsymbol{\theta}^{(s+1)}$ from $\{\boldsymbol{\theta}_1,\ldots,\boldsymbol{\theta}_{J_1}\}$, with probabilities $\{p_{1}^{\boldsymbol{\theta}},\ldots,p_{J_1}^{\boldsymbol{\theta}}\}$, 
+    where $p_{j_1}^{\boldsymbol{\theta}} = q_{j_1}^{\boldsymbol{\theta}}\{\sum_{k=1}^{J_1} q_{k}^{\boldsymbol{\theta}}\}^{-1}$ and
+    $$\begin{align*}
+    q_{j_1}^{\boldsymbol{\theta}}=\exp\left\{-\frac{C_{j_1,j_2^{(s)},j_3^{(s)}}}{2\sigma^{2(s+1)}} \right\} \pi(\boldsymbol{\theta}_{j_1}), 
+    \end{align*}$$
+    and set $j_1^{(s+1)}$ to be the index of the sampled value.
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Posterior]">
+        <h2>Posterior Sampling</h2>
+        Draw $\rho^{(s+1)}$ from $\{\rho_1,\ldots,\rho_{J_2}\}$, with probabilities $\{p_{1}^{\rho},\ldots,p_{J_2}^{\rho}\}$, 
+    where $p_{j_2}^{\rho} = q_{j_2}^{\rho}\{\sum_{k=1}^{J_2} q_{k}^{\rho}\}^{-1}$ and
+    $$\begin{align*}
+    q_{j_2}^{\rho}=D_{j_2,j_3^{(s)}}^{-1/2}\exp\left\{-\frac{C_{j_1^{(s+1)},j_2,j_3^{(s)}}}{2\sigma^{2(s+1)}} \right\} \pi(\rho_{j_2}),
+    \end{align*}$$
+    and set $j_2^{(s+1)}$ to be the index of the sampled value.
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Posterior]">
+        <h2>Posterior Sampling</h2>
+        Draw $\phi^{2(s+1)}$ from $\{\phi_1,\ldots,\phi_{J_3}\}$, with probabilities $\{p_{1}^{\phi},\ldots,p_{J_3}^{\phi}\}$, 
+    where $p_{j_3}^{\phi} = q_{j_3}^{\phi}\{\sum_{k=1}^{J_3} q_{k}^{\phi}\}^{-1}$ and
+    $$\begin{align*}
+    q_{j_3}^{\phi}=D_{j_2^{(s+1)},j_3}^{-1/2} \exp\left\{-\frac{C_{j_1^{(s+1)},j_2^{(s+1)},j_3}}{2\sigma^{2(s+1)}} \right\} \pi(\phi_{j_3}),
+    \end{align*}$$
+    and set $j_3^{(s+1)}$ to be the index of the sampled value.
+    </section>
+    -->
+
+    <!--Priors-->
+    <!--
+    <section>
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/gg/gg_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600">
+            <rect x="329" y="195" width="225" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Priors]">
+        <h2>Prior Distributions</h2>
+        <ul>
+            <li>$\pi(\theta_p) \sim \textrm{U}(a_p,b_p)$</li>
+            <li>$\pi(\sigma^2) \sim \textrm{IG}(\alpha_1,\beta_1)$</li>
+            <li>$\pi(\phi) \sim \textrm{IG}(\alpha_2,\beta_2)$</li>
+            <li>$\pi(\rho) \sim \textrm{U}(0,1)$</li>
+        </ul>
+    </section>
+    -->
+
+    
+    
+    <section data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Case Study</h2>
+        Calibration of three unknown boundary conditions in a piston heat transfer model
+        <ul>
+            <li>Determine the sufficient number of grid points for the griddy Gibbs approach</li>
+            <li>Compare the proposed griddy Gibbs approach to traditional Bayesian model calibration</li>
+        </ul>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Case Study</h2>
+        <div class="figcols">
+            <div style="width: 120%;">
+                Synthetic data
+                <ul style="font-size: 24pt;">
+                    <li>Undercrown BC, $$\theta_1^* = 1000 \textrm{W}\textrm{m}^{-2}\textrm{K}^{-1}$$</li>
+                    <li>Gallery 1 BC, $$\theta_2^* = 3000 \textrm{W}\textrm{m}^{-2}\textrm{K}^{-1}$$</li>
+                    <li>Gallery 2 BC, $$\theta_3^* = 2000 \textrm{W}\textrm{m}^{-2}\textrm{K}^{-1}$$</li>
+                </ul>
+            </div>
+            <div class="figure">
+                <img src="assets/figures/gg/bcs_tcs.png">
+                <figcaption>Boundary conditions and measurement locations</figcaption>
+            </div>
+        </div>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Data Generation</h2>
+        <ul>
+            <li>6, 15, 27, and 54 temperature responses were considered</li>
+            <li>Two sets of data were considered</li>
+            <ul style="font-size: 28pt;">
+                <li>Data without discrepancy, $y = g(\mathbf{X},\boldsymbol{\theta}^*) + \boldsymbol{\varepsilon}$</li>
+                <li>Data with discrepancy, $y = g(\mathbf{X},\boldsymbol{\theta}^*) + \boldsymbol{\delta} + \boldsymbol{\varepsilon}$</li>
+                <li>$\delta(\mathbf{x}) \sim \textrm{GP}(\boldsymbol{0},\Sigma(\mathbf{x},\mathbf{x}'))$</li>
+                <li>$\Sigma(\mathbf{x},\mathbf{x}') = 40 \prod_{k=1}^{Q} 0.8^{4 (x_k - x_k')^2}$</li>
+                <li>$\varepsilon \sim \textrm{N}(0,0.4)$</li>
+            </ul>
+        </ul>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Study 1</h2>
+        <ul>
+            <li>For both sets of data (discrepancy and no discrepancy) evaluate the griddy gibbs calibration</li>
+            <ul>
+                <li>Grid densities ranging from 7 to 49</li>
+            </ul>
+            <li>Determine sufficient grid density (when results are independent of grid density)</li>
+        </ul>
+
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Study 1 Results</h2>
+        <div class="figure">
+            <img src="assets/figures/gg/test_nsimstudy_ny6.png">
+            <figcaption>Posterior estimates for $n_y=6$ as a function of grid density, with and without discrepancy in the data</figcaption>
+        </div>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Study 1 Results</h2>
+        <div class="figure">
+            <img src="assets/figures/gg/test_nsimstudy_ny54.png">
+            <figcaption>Posterior estimates for $n_y=54$ as a function of grid density, with and without discrepancy in the data</figcaption>
+        </div>
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Study 2</h2>
+        <ul>
+            <li>Compare the proposed griddy Gibbs approach to traditional Bayesian model calibration</li>
+            <ul>
+                <li>Posterior distributions</li>
+                <li>Computational cost of each method</li>
+            </ul>
+        </ul>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Study 2 Results</h2>
+        <div class="figure">
+            <img src="assets/figures/gg/ny6nsim49_thetahist_combined.png">
+            <figcaption>Comparison of griddy Gibbs and traditional calibration for $n_y=6$</figcaption>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Study 2 Results</h2>
+        <div class="figure">
+            <img src="assets/figures/gg/ny54nsim49_thetahist_combined.png">
+            <figcaption>Comparison of griddy Gibbs and traditional calibration for $n_y=54$</figcaption>
+        </div>
+    </section>
+    <!--
+    <section>
+        <h2>Comparison Results</h2>
+        <div class="figure">
+            <img src="assets/figures/gg/gg_table1.png">
+            <figcaption></figcaption>
+        </div>
+    </section>
+    <section>
+        <h2>Comparison Results</h2>
+        <div class="figure">
+            <img src="assets/figures/gg/gg_table2.png">
+        </div>
+    </section>
+    -->
+    <section data-header="Griddy Gibbs Calibration [Case Study]">
+        <h2>Study 2 Results</h2>
+        <div class="figure">
+            <img src="assets/figures/gg/gg_table3.png">
+            <figcaption>Comparison of computational expense for the griddy Gibbs and traditional calibration approaches</figcaption>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Conclusion]">
+        <h2>Conclusions</h2>
+        <ol>
+            <li>The griddy Gibbs approach offers comparable posterior estimation to the traditional calibration approach</li>
+            <ul>
+                <li>Central tendency</li>
+                <li>Uncertainty and 95% CI estimation</li>
+            </ul>
+        </ol>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Conclusion]">
+        <h2>Conclusions</h2>
+        <ol start="2">
+            <li>The griddy Gibbs approach achieves these estimates with significant computational savings</li>
+            <ul>
+                <li>Especially true for larger $n$</li>
+                <li>Tradeoff in greater memory usage</li>
+            </ul>
+        </ol>
+    </section>
+</section>

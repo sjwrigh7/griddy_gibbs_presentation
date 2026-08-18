@@ -1,0 +1,22 @@
+<section>
+    <section data-header="Bayesian Model Calibration">
+        <h2>Discrepancy Term</h2>
+        The discrepancy term is traditionally modeled as a Gaussian process
+        $$\delta(\mathbf{x}) \sim \textrm{GP}(\mu(\mathbf{x}),\Sigma(\mathbf{x},\mathbf{x}'))$$
+        <!--
+        Example covariance structure (from Higdon et al. [7])
+        $$\Sigma(\mathbf{x},\mathbf{x}') = \tau^2 \prod_{k=1}^{Q} \rho_k^{4 (x_k - x_k')^2}$$
+        -->
+    </section>
+
+    <section data-header="Bayesian Model Calibration" data-auto-animate>
+        <h2>Likelihood</h2>
+        This gives the joint conditional distribution of the data (the likelihood)
+        $$\begin{align*}
+        \pi(\mathbf{Y}|\boldsymbol{\theta},\boldsymbol{\delta},\sigma^2,\tau^2,\boldsymbol{\rho},\mathbf{X}) \propto \prod_{j=1}^m \bigg[ \left( 2\pi \sigma^2\right)^{-n/2}\\
+        \exp \left\{- \frac{1}{2\sigma^2} \big[\mathbf{y}_j-\mathbf{g}-\boldsymbol{\delta}\big]^T\big[\mathbf{y}_j-\mathbf{g}-\boldsymbol{\delta}\big]\right\}
+        \bigg]
+        \end{align*}
+        $$
+    </section>
+</section>

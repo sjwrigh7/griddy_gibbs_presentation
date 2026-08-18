@@ -1,0 +1,345 @@
+<section>
+    <section>
+        <h1>Introduction</h1>
+    </section>
+    <section data-header="Introduction [Motivation]">
+        <h2>Piston Fatigue</h2>
+
+        <div class=figcols>
+        
+            <div style="width: 130%; height: auto;">
+                <p>Fatigue failure is the primary concern for failure of internal combustion engine (ICE) pistons due to cyclic thermal and mechanical loads
+                </p>
+                <ul>
+                    <li>Combustion pressure</li>
+                    <li>Heat softening</li>
+                    <li>Thermal stresses</li>
+                </ul>
+            </div>
+            <div>
+                <div class="figcols">
+                    <div class="figure">
+                        <img src="https://www.renntech.org/uploads/monthly_08_2008/post-4-1219793789_thumb.jpg">
+                    </div>
+                
+                    <div class="figure">
+                        <img src="https://www.aa1car.com/library/diesel_piston_damage.jpg">
+                    </div>
+                </div>
+                <div class="figure" style="width: 110%; height: auto;">
+                    <img src="https://ars.els-cdn.com/content/image/1-s2.0-S1350630705000580-gr4.jpg">
+                    <figcaption>Example piston failures [1,2,3].</figcaption>
+                </div>
+            </div>
+        </div>
+        <aside class="notes">
+            The context of my work is based in fatigue of pistons<br>
+            ...
+            primary failure mechanism for pistons<br>
+            due to 
+        </aside>
+    </section>
+
+    <section data-header="Introduction [Motivation]" data-auto-animate>
+        <h2>Piston Modeling</h2>
+        <div class="figcols">
+            <div style="width: 80%;">
+                <p>
+                    Computer models can be used
+                </p>
+                <ul>
+                    <li>Computational fluid dynamics (CFD) for combustion heat transfer and pressure</li>
+                    <li>Finite element analysis (FEA) of piston temperature and stress</li>
+                </ul>
+            </div>
+            <div class="figure">
+                <img src="assets/figures/intro/fem_results.png">
+                <figcaption>2D FEA heat transfer solution.</figcaption>
+            </div>
+        </div>
+    </section>
+
+    <!--CFD submodels-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+            <rect x="38" y="30" width="190" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+
+    <section data-header="Piston Co-Simulation">
+        <h2>CFD Submodels</h2>
+        Models controlling specific physics details in the main CFD model
+        <ul>
+            <li>E.g. spray break-up, evaporation, turbulent dispersion, collision, drop drag, spray-wall interaction, wall splash, turbulence, heat transfer</li>
+        </ul>
+        Details of CFD modeling and submodels described in the work of Ravikumar [27,28]
+    </section>
+
+    <!--Crown guess-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+            <rect x="231" y="30" width="190" height="165" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+        <!--CFD model-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+            <rect x="38" y="143" width="190" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>CFD Model</h2>
+        <div class="figcols">
+            <div style="width: 100%; font-size: 24pt;">
+                Solves the thermodynamics, heat transfer, and fluid dynamics of the combustion event
+                <ul>
+                    <li>Inputs: submodels, combustion chamber geometry, fuel properties, piston crown surface temperature</li>
+                    <li>Outputs: pressure, velocity, temperature, heat flux fields in the combustion chamber</li>
+                </ul>
+            </div>
+            <div>
+                <video
+                data-autoplay controls loop
+                src="assets/figures/cosim/CFD_vid2.mp4"
+                ></video>
+            </div>
+        </div>
+    </section>
+
+    <!--experimental testing-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+            <rect x="413" y="30" width="215" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>Experimental Testing</h2>
+        <div class="figcols">
+            <div style="font-size: 24pt; width: 90%;">
+                <ul>
+                    <li>Wireless telemetry system for piston thermocouples and heat flux probes</li>
+                    <li>Additional pressure and heat flux instrumentation in cylinder</li>
+                </ul>
+                <div class="figure">
+                    <img src="assets/figures/cosim/experimental_temps.png" width="80%;">
+                </div>
+            </div>
+            <div style="width: 60%;">
+                <div class="figure">
+                    <img src="assets/figures/cosim/crown_tcs.jpg">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Validated CFD model-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+            <rect x="11" y="308" width="242" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>CFD Validation</h2>
+        <div class="figcols">
+            <div style="width: 80%; font-size: 28pt;">
+                Validation of CFD model to experimental data by in-cylinder pressure and heat release rate
+            </div>
+            <div class="figure">
+                <img src="assets/figures/cosim/cfd_validation.png">
+            </div>
+        </div>
+    </section>
+
+    <!--Map to FEA-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+            <rect x="262" y="262" width="186" height="172" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>CFD Results Mapping</h2>
+        <div class="figcols">
+            <div style="width: 70%">
+                CFD predicted heat transfer to the piston crown is mapped to the FEA model as a convection boundary condition
+            </div>
+            <div class="figure">
+                <img src="assets/figures/cosim/mapping.png">
+            </div>
+        </div>
+    </section>
+
+    <!--FEA model-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+            <rect x="425" y="198" width="190" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>Finite Element Model</h2>
+        <div class="figcols">
+            <div style="font-size: 24pt;">
+                <ul>
+                    <li>First order, diffusive, solid tetrahedron elements</li>
+                    <li>Steady state heat transfer solution</li>
+                    <li>Inputs: CFD mapping, backside boundary conditions, solid material properties</li>
+                    <li>Outputs: steady state temperature solution</li>
+                </ul>
+            </div>
+            <div class="figure">
+                <img src="assets/figures/intro/fem_results.png">
+                <figcaption>2D FEA heat transfer solution.</figcaption>
+            </div>
+        </div>
+    </section>
+
+    <!--unknown parameters-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 800 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="531" y="30" width="220" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>Unknown Parameters</h2>
+        <div class="figcols">
+            <div style="width: 80%; font-size: 24pt;">
+                Many backside boundary conditions are unknown
+            </div>
+            <div class="figure">
+                <img src="assets/figures/sensor_opt/main2.png">
+            </div>
+        </div>
+    </section>
+
+    <!--Model Calibration-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="635" y="130" width="213" height="213" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>Model Calibration</h2>
+        <div class="figcols">
+            <div style="width: 80%; font-size: 28pt;">
+                Bayesian model calibration can be used to fine-tune these unknown parameters
+                <ul>
+                    <li>Cycle-averaged experimental temperaure</li>
+                    <li>FE-predicted steady state temperature</li>
+                </ul>
+            </div>
+            <div class="figure">
+                <img src="assets/figures/cosim/model_calibration.png">
+            </div>
+        </div>
+    </section>
+
+    <!--Calibrated Parameters-->
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="626" y="363" width="232" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>Calibrated Parameters</h2>
+        <div class="figcols">
+            <div style="width: 80%;">
+                Probability distribution of unknown parameters conditioned on data
+            </div>
+            <div class="figure">
+                <img src="assets/figures/cosim/prior_posterior.png">
+            </div>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:95%; height: auto;">
+                <img src="assets/figures/cosim/cosim_flowchart2.png">
+            </div>
+            <svg viewBox="0 0 800 600" width="800" height="600" class="fragment fade-in">
+            <rect x="230" y="113" width="190" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <section data-header="Piston Co-Simulation">
+        <h2>Co-simulation</h2>
+        <div class="figcols">
+            <div class="figure" style="width: 70%;">
+                <img src="assets/figures/cosim/crown_surface2.png">
+            </div>
+        </div>
+
+    </section>
+
+</section>

@@ -1,0 +1,430 @@
+<!-- Overview Slide -->
+<section>
+    <section>
+        <h1>Sensor Optimization</h1>
+        <h1 class="r-fit-text">Optimization algorithm for sensor placement in piston thermal testing</h1>
+    </section>
+    <!--
+    <section data-auto-animate>
+        <h2>Overview</h2>
+        <h4 class="subtitle">Review of Sensor Selection Methodology and Journal Paper</h4>
+        <ul>
+            <li>Motivation Recap</li>
+            <li>Methodology Description</li>
+            <li>Application to 2D DD13 FE model</li>
+            <li>Optimization Results</li>
+            <li>Algorithm Validation Procedure and Results</li>
+        </ul>
+    </section>
+    
+    <section data-auto-animate>
+        <h2>Overview</h2>
+        <h4 class="subtitle">Future Work Discussion</h4>
+        <ul>
+            <li>Fatigue analysis of pistons</li>
+        </ul>					
+    </section>
+-->
+<!-- Sensor Selection Review -->
+    <!-- Motivation Recap-->
+
+    <section data-auto-animate data-header="Sensor Optimization [Motivation]">
+        <h2>Motivation</h2>
+        <h4 class="subtitle">Improve FE modeling capabilities for pistons</h4>
+        <h4>To achieve</h4>
+        <ul>
+            <li>Greater predictive accuracy</li>
+            <!--<li>Greater fidelity capabilities</li>-->
+            <li>Reduced uncertainty in model</li>
+        </ul>
+    </section>
+
+    <section data-auto-animate data-header="Sensor Optimization [Motivation]">
+        <h2>Motivation</h2>
+        <h4 class="subtitle">Improve FE modeling capabilities for pistons</h4>
+        <div class="block">
+            <h4>The goal is to develop a framework for identifying optimal measurement locations</h4>
+        </div>
+        <ul>
+            <li>Better experimental data improves calibration capabilites</li>
+            <!--<li>Improved calibration gives space for higher fidelity modeling capabilites</li>-->
+        </ul>
+    </section>
+
+    <!--computer model-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/sensor_opt_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="240" y="57" width="177" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Application to 2D DD13 Model -->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>2D Piston Model</h2>
+        <h4 class="subtitle">Mesh</h4>
+        <div class="figcols">
+            <div style="font-size: 24pt; width: 80%">
+                <ul>
+                    <li>2D slice of 3D piston CAD</li>
+                    <li>1st order solid diffusive elements: trias and quads</li>
+                    <ul>
+                        <li>0.7 mm element size at crown</li>
+                        <li>2.5 mm element size at skirt</li>
+                    </ul>
+                </ul>
+            </div>
+            <div class="figure" style="width: 35%;">
+                <img src="assets/figures/sensor_opt/2d_mesh.png">
+            </div>
+        </div>
+        
+    </section>
+
+    <!--computer model-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Piston Model Unknown BCs</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/main2.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600">
+            <!--Gallery 1-->
+            <rect x="67" y="77" width="140" height="35" stroke="var(--oki3)" stroke-width="3" fill="none" class="fragment fade-in"></rect>
+            <!--Gallery 2-->
+            <rect x="5" y="120" width="120" height="330" stroke="var(--oki2)" stroke-width="3" fill="none" class="fragment fade-in"></rect>
+            <!--Gallery 3-->
+            <rect x="134" y="145" width="93" height="305" stroke="var(--oki4)" stroke-width="3" fill="none" class="fragment fade-in"></rect>
+            <!--UC 1-->
+            <rect x="240" y="173" width="180" height="32" stroke="var(--oki1)" stroke-width="3" fill="none" class="fragment fade-in"></rect>
+            <!--UC 2-->
+            <rect x="310" y="280" width="180" height="32" stroke="var(--oki7)" stroke-width="3" fill="none" class="fragment fade-in"></rect>
+            <!--Skirt-->
+            <rect x="400" y="330" width="80" height="35" stroke="var(--oki8)" stroke-width="3" fill="none" class="fragment fade-in"></rect>
+            <!--Land 1-->
+            <rect x="710" y="128" width="120" height="23" stroke="var(--oki5)" stroke-width="3" fill="none" class="fragment fade-in"></rect>
+            <!--Lower lands-->
+            <rect x="710" y="154" width="200" height="303" stroke="var(--oki6)" stroke-width="3" fill="none" class="fragment fade-in"></rect>
+            <!--<rect x="710" y="332" width="200" height="125" stroke="var(--oki7)" stroke-width="3" fill="none" class="fragment fade-in"></rect>-->
+
+            </svg>
+        </div>
+        <aside class="notes">
+            The proposed approach is two-phase and based on one-at-a-time optimization where each sensor is optimized to estimate a single unknown parameter<br>
+            The unknown BCs are grouped to match the number of available sensors (8)
+        </aside>
+    </section>
+
+    <!--
+    <section data-auto-animate data-header="Sensor Optimization [FE Model]">
+        <h2>2D Piston Model</h2>
+        <figure>
+            <img src="assets/figures/sensor_opt/main2.png" style="width: 75%">
+            <figcaption>Boundary Conditions in 2D FEM.</figcaption>
+        </figure>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [FE Model]">
+        <h2>Application to 2D Piston Model</h2>
+        <h4 class="subtitle">Model boundary conditions grouping</h4>
+        <ul>
+            <li>The one-at-a-time optimization approach maps sensors to unknown parameters 1:1</li>
+            <li>Boundary conditions were grouped so that the total number of unknown BCs is the same as the number of sensors available (8 dedicated to the backside)</li>
+        </ul>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [FE Model]">
+        <h2>Application to 2D Piston Model</h2>
+        <h4 class="subtitle">Model boundary conditions grouping</h4>
+        <ul>
+            <li>"Gallery, curve" and "Gallery, inner wall" were grouped</li>
+            <li>"Gallery, bottom" and "Gallery, outer wall" were grouped</li>
+            <li>"Groove 1", "Land 2", and "Groove 2" were grouped</li>
+            <li>"Land 3", "Groove 3", and "Land 4" were grouped</li>
+        </ul>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [FE Model]">
+        <h2>Application to 2D Piston Model</h2>
+        <div class="block">
+            Solve the two-stage optimization procedure for each sensor
+        </div>
+    </section>
+    -->
+
+    <!--potential truth-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/sensor_opt_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="8" y="55" width="190" height="150" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+        <aside class="notes">
+            The two-phase one-at-a-time approach holds unknowns at fixed values for computational efficiency so many configurations of potential truth are considered
+        </aside>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Potential Truth</h2>
+        <ul>
+            <li>Generate a 25x8 Latin hypercube design</li>
+            <li>25 configurations of the 8 $\theta$, denote this as $\boldsymbol{\Theta}^* = (\boldsymbol{\theta}^*_1,\boldsymbol{\theta}^*_2,\ldots,\boldsymbol{\theta}^*_{25})$</li>
+            <li>Consider each of these 25 configurations a different possibility of the "true" values of the unknown BCs</li>
+        </ul>
+    </section>
+
+    <!--phase 1-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/sensor_opt_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="685" y="30" width="220" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>First stage optimization</h2>
+        <ul>
+            <li>Genetic algorithm (GA) optimization for each sensor at each $\boldsymbol{\theta}^*_i$</li>
+            <ul>
+                <li>Genetic algorithm efficiently explores the space</li>
+                <li>Unique set of results for each $\boldsymbol{\theta}^*_i$</li>
+            </ul>
+        </ul>
+    </section>
+
+    <!--thermocouple location-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/sensor_opt_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="425" y="57" width="232" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Location Mapping</h2>
+        Each candidate solution in the GA is defined in $\mathbb{R}^2$
+        <ul>
+            <li>Must be mapped to the piston geometry to explore only feasible locations</li>
+            <li>We already have a set of discrete points approximating the piston geometry (the FE mesh)</li>
+            <ul>
+                <li>Map all candidate solutions to the FE node coordinate with the least Euclidean distance</li>
+            </ul>
+        </ul>
+    </section>
+
+    <!--data synth-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/sensor_opt_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="342" y="163" width="187" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Data Synthesis</h2>
+        <h4 class="subtitle">Data synthesis</h4>
+        For a given configuration $\boldsymbol{\theta}^*_i$
+        <ol>
+            <li>Solve the FE model</li>
+            <li>Draw 200 samples of Gaussian noise and add this to the FE model results</li>
+        </ol>
+    </section>
+
+    <!--fisher-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/sensor_opt_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="327" y="270" width="217" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Objective Function</h2>
+        <h4 class="subtitle">Fisher Information</h4>
+        
+        $$O = \frac{-\partial^2 \log L}{{\partial \theta}^2}$$
+
+        <ul style="font-size: 24pt;">
+            <li>Negative curvature of the log likelihood with respect to a given $\theta$ at the MLE</li>
+            <li>A measurement of how sensitive the likelihood is to this $\theta$</li>
+
+        </ul>
+    </section>
+
+    <!--populations results-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/sensor_opt_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="685" y="137" width="220" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Candidate Optima</h2>
+        <h4 class="subtitle">Genetic Algorithm Results</h4>
+        <div class="figcols">
+            <div style="width: 100%; font-size: 22pt;">
+                For each setting of $\boldsymbol{\theta}^*_i$, the GA results are a population of candidate optima
+                <ul>
+                    <li>Each population is a collection of multiple candidates for maximum Fisher information</li>
+                    <li>Each is dependent on the specific $\boldsymbol{\theta}^*_i$ used to generate data for that case</li>
+                </ul>
+            </div>
+            <figure style="width: 100%;">
+                <img src="assets/figures/sensor_opt/CG1-pop_convergence.png" data-id="img1">
+            </figure>
+        </div>
+    </section>
+
+    <!--phase 2-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/sensor_opt_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="685" y="243" width="220" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Phase 2 Optimization</h2>
+
+        <ul style="font-size: 24pt;">
+            <li>Calculate the boundary around all of the candidate solution populations via $R=[x_{\textrm{min}},x_{\textrm{max}}] \times [y_{\textrm{min}},y_{\textrm{max}}]$</li>
+            <li>Map this to the FE mesh to find all nodes inside the boundary, $R'$</li>
+            <li>For each location in $R'$, we find the minimum Fisher information, minimized over the different configurations of $\boldsymbol{\Theta}^*$, 
+                denoted as $\mathcal{I}_{\textrm{min}}$</li>
+            <li>We find the location that has the greatest $\mathcal{I}_{\textrm{min}}$</li>
+            <li>This location is the "safest" choice for placing a sensor</li>
+        </ul>
+    </section>
+
+    <!--final results-->
+    <section data-auto-animate data-header="Sensor Optimization [Approach]">
+        <h2>Approach</h2>
+        <div class="img-overlay-wrap">
+            <div class="figure" style="width:100%; height: auto;">
+                <img src="assets/figures/sensor_opt/sensor_opt_flowchart.png">
+            </div>
+            <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+            <rect x="685" y="350" width="220" height="80" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Results -->
+    <section data-auto-animate data-header="Sensor Optimization [Optimization Results]">
+        <h2>Results</h2>
+        <div class="figcols">
+            <figure style="width: 57%;">
+                <img src="assets/figures/sensor_opt/CG1-min_fisher.png">
+                <figcaption style="font-size: 16pt;">Minimax Fisher information w.r.t. "Gallery, top" BC in it's solution region.</figcaption>
+            </figure>
+        </div>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Optimization Results]">
+        <h2>Results</h2>
+        <figure>
+            <img src="assets/figures/sensor_opt/-sum_fisher.png" style="width: 55%">
+            <figcaption>Normalized sum of minimax Fisher information for all BCs.</figcaption>
+        </figure>
+    </section>
+    <!-- Validation -->
+    <section data-auto-animate data-header="Sensor Optimization [Validation]">
+        <h2>Methodology Validation</h2>
+        <h4 class="subtitle">Validation Approach</h4>
+        <ul>
+            <li>Calibrate the FE model 25 new configurations of $\boldsymbol{\theta}^*$</li>
+            <li>Two sets of data</li>
+            <ul>
+                <li>Algorithm selected measurement locations</li>
+                <li>A real piston's thermocouple locations</li>
+            </ul>
+            <li>Compare calibration results</li>
+        </ul>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Validation]">
+        <h2>Methodology Validation</h2>
+        <h4 class="subtitle">Comparison Metrics</h4>
+        <ul>
+            <li>Variance of posterior distribution for each calibration parameter</li>
+            <li>MSE of posterior distribution compared to values used to synthesize data</li>
+        </ul>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Validation]">
+        <h2>Methodology Validation</h2>
+        <h4 class="subtitle">Comparison Metrics</h4>
+        <p>Two comparison methods</p>
+        <ul>
+            <li>Log-ratio: values greater than 0 indicate improvement when using the algorithm-selected locations</li>
+            <li>Box plots showing distribution of metrics for the the two data sets</li>
+        </ul>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Validation]">
+        <h2>Validation Results</h2>
+        <p style="font-size: 14pt;">Red lines indicate the log-ratio threshold for improvement with algorithm proposed nodes.
+            Blue lines indicate the average log-ratio for the given $\theta$
+        </p>
+        <figure>
+            <div class="vipr-centered">
+                <div class="vipr-scroll">
+                    <img src="assets/figures/sensor_opt/full_theta_results.png" alt="Large figure">
+                </div>
+            </div>
+            <figcaption>Validation MSE and variance for all unknown parameters.</figcaption>
+        </figure>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Conclusion]">
+        <h2>Conclusions</h2>
+        <p>Posterior variance</p>
+        <ul>
+            <li>Reduced posterior variance when calibrating to the algorithm-selected locations in 99% of parameter configurations</li>
+            <li>Average reduction in posterior variance of 70.4%</li>
+            <ul>
+                <li>Average standard deviation decrease in estimates of unknown boundary conditions
+                    \[76 \space Wm^{-2}K^{-1}\]
+                </li>
+            </ul>
+        </ul>
+    </section>
+    <section data-auto-animate data-header="Sensor Optimization [Conclusion]">
+        <h2>Conclusions</h2>
+        <p>Posterior Error</p>
+        <ul>
+            <li>Reduced MSE when calibrating to the algorithm-selected locations in 83.5% of parameter configurations</li>
+            <li>Average reduction in MSE of 43.9%</li>
+            <ul>
+                <li>Average RMSE decrease in estimates of unknown boundary conditions
+                    \[136 \space Wm^{-2}K^{-1}\]
+                </li>
+            </ul>
+        </ul>
+    </section>
+</section>

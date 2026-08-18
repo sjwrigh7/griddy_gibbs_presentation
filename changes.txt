@@ -1,0 +1,4 @@
+1) Duplicate Bayes' theorem equation on slide 4.2 to 4.3
+2) Duplicate slide 6.5 (griddy Gibbs sampling highlight in flowchart) to after slide 6.22 (details on precomputation)
+3) replace surrogate model term (eta) with computer model term (g) in slides 4.15 and 4.17
+4) "mdoel" typo fixed in slide 5.9

@@ -1,0 +1,77 @@
+<section>
+    <section data-header="Griddy Gibbs Calibration [Motivation]">
+        <h2>Motivation</h2>
+        Computational expense is due to the continuous nature of the computer model and MCMC algorithm
+        <ul>
+            <li>Given $\boldsymbol{\theta} \in \boldsymbol{\Theta} \subset \mathbb{R}^P$ and $\mathbf{x} \in \mathcal{X} \subset \mathbb{R}^Q$</li>
+            <li>Computer model is expressed $g: \boldsymbol{\Theta} \times \mathcal{X} \rightarrow \mathbb{R}$</li>
+        </ul>
+        Expensive MCMC to draw finite samples of the posterior distribution
+    </section>
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Discrepancy</h2>
+        When in the mean
+        <ul>
+            <li>Find $g$ and $\delta$ such that $y \sim \textrm{N}(g+\delta,\sigma^2)$</li>
+            <li>$\delta$ shifts the mean</li>
+            <li>Unidentifiable: $\forall g, \; \exists \delta$ satisfying this</li>
+        </ul>
+    </section>
+
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Discrepancy</h2>
+        When in the variance
+        <ul>
+            <li>Find $g$ such that $y \sim \textrm{N}(g,\sigma^2 + \delta^*)$</li>
+            <li>$\delta^*$ increases the variance</li>
+            <li>More stable in estimating $g$</li>
+        </ul>
+    </section>
+
+    <section data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Data Model</h2>
+        Integrating the discrepancy term gives
+
+        $$\mathbf{y}|\mathbf{X},\boldsymbol{\theta}\sim \textrm{MVN}\{\eta(\mathbf{x}_i,\boldsymbol{\theta}),\sigma^2\boldsymbol{\Sigma}^*\}$$
+        <ul>
+            <li>$\boldsymbol{\Sigma}^*=\mathbf{I}+{\phi}\mathbf{C}$</li>
+            <li>${\phi}=\tau^2/\sigma^2$</li>
+        </ul>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Formulation of Sampling Grid</h2>
+        Turn back to surrogate models!
+        <ol>
+            <li>Solve $g$ over an initial design of $\boldsymbol{\theta}$ values</li>
+            <ul>
+                <li>Design $\mathcal{D}$</li>
+                <li>Response $g(\mathcal{D})$</li>
+            </ul>
+            <li>Train a surrogate model on $g$, $\eta$</li>
+        </ol>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Formulation of Sampling Grid</h2>
+        <ol start="3" style="font-size: 38;">
+            <li>Evaluate likelihood using the surrogate model, $L|\eta$</li>
+            <ul>
+                <li>Find the maximum likelihood estimate, $\widehat{\boldsymbol{\theta}}_{MLE}$</li>
+                <li>Determine the upper and lower asymptotic bounds of the likelihood of $\eta$, 
+                    $$\small \begin{align*}
+                     \boldsymbol{\theta}_U = (\theta_{1,U},\theta_{2,U},\ldots,\theta_{P,U})\\
+                    \boldsymbol{\theta}_L = (\theta_{1,L},\theta_{2,L},\ldots,\theta_{P,L})
+                    \end{align*}$$
+                </li>
+            </ul>
+        </ol>
+    </section>
+    <section data-auto-animate data-header="Griddy Gibbs Calibration [Approach]">
+        <h2>Formulation of Sampling Grid</h2>
+        <ol start="4">
+            <li>Generate the grid of $\boldsymbol{\theta}$ in Cartesian product space $[\theta_{1,L},\theta_{1,U}] \times [\theta_{2,L},\theta_{2,U}] \times \cdots \times [\theta_{P,L},\theta_{P,U}]$</li>
+            <ul>
+                <li>Achieve a far denser grid in the high posterior density region with fewer computer model runs</li>
+            </ul>
+        </ol>
+    </section>
+</section>

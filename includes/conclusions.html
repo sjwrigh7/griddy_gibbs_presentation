@@ -1,0 +1,161 @@
+<section>
+    <section>
+        <h1>Summary of Work to Date and Key Contributions</h1>
+    </section>
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Griddy Gibbs Calibration</h4>
+        <ol>
+            <li>By using a discrete grid of possible points, precomputation can be leveraged to greatly improve the computational expense of MCMC</li>
+            <li>The proposed grid selection approach allows efficient selection and evaluation of the discrete grid to produce comparable posterior estimates to traditional continuous MCMC</li>
+        </ol>
+    </section>
+
+    <!--
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Griddy Gibbs Calibration</h4>
+        <ol start="3">
+            <li>By using the griddy Gibbs sampling scheme, Markov chain performance is improved compared to Metropolis-Hastings updates</li>
+            <ul>
+                <li>Faster chain convergence</li>
+                <li>No need to identify an appropriate step size, saving further computational expense</li>
+            </ul>
+        </ol>
+    </section>
+    -->
+
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Griddy Gibbs Calibration</h4>
+        <ol start="3">
+            <li>Integrating the discrepancy term improves stability and convergence of MCMC</li>
+            <ul>
+                <li>Discrepancy is not directly estimated in the mean vector</li>
+                <li>The discrepancy is still accounted for in the covariance matrix</li>
+            </ul>
+        </ol>
+    </section>
+
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Sensor Optimization</h4>
+        <ol>
+            <li>One-at-a-time optimization approach resolves issues with D-optimality approaches in literature</li>
+            <ul>
+                <li>Determinant of Fisher information matrix can lead to multiple optima</li>
+                <li>D-optimality approach is computationally infeasible for computationally expensive computer models</li>
+            </ul>
+        </ol>
+    </section>
+
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Sensor Optimization</h4>
+        <ol start="2">
+            <li>Mesh mapping approach easily handles optimization over complicated domains</li>
+            <ul>
+                <li>Map any arbitrary proposed solution from $\mathbb{R}^n$ to the piston's FE mesh</li>
+            </ul>
+            <li>Efficient exploration of the domain by genetic algorithm</li>
+        </ol>
+    </section>
+
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Sensor Optimization</h4>
+        <ol start="4">
+            <li>Two-stage approach is robust to uncertainty</li>
+            <ul>
+                <li>First stage considers many possible values of the unknown "truth"</li>
+                <li>Second stage identifies the best sensor location, considering the uncertainty of the unknown "truth"</li>
+            </ul>
+        </ol>
+    </section>
+
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Fatigue Data Analysis</h4>
+        <ol style="font-size: 26pt;">
+            <li>Flexible and implicit representation of $S$-$N$ and cumulative damage models with a splines-based hazard model</li>
+            <ul>
+                <li>Achieves good estimates of the underlying $S$-$N$ curve for data with both positive and negative stress steps</li>
+                <li>No need to explicitly specify the form of $S$-$N$ and cumulative damage model, like is needed with traditional modeling approaches</li>
+            </ul>
+        </ol>
+    </section>
+
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Fatigue Data Analysis</h4>
+        <ol start="2" style="font-size: 26pt;">
+            <li>Proposed optimal experiment design approach results in tests that are far more informative than traditional test designs</li>
+            <ul>
+                <li>Improved estimation with far fewer tests</li>
+                <li>Useful information obtained from each new test design</li>
+            </ul>
+        </ol>
+    </section>
+
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Fatigue Data Analysis</h4>
+        <ol start="3" style="font-size: 26pt;">
+            <li>Allowing negative stress steps in test designs can reduce the time needed to test specimens</li>
+            <ul>
+                <li>Exhaust a portion of damage at a high stress</li>
+                <li>Reduce the stress and observe failure at a low stress in fewer cycles</li>
+                <li>A good representation of the cumulative damage mechanism is necessary</li>
+                <li>Explicit cumulative damage models in traditional modeling approaches are sensitive to mis-specification with negative stress steps</li>
+            </ul>
+        </ol>
+    </section>
+    <section data-auto-animate data-header="Key Contributions">
+        <h2>Key Contributions</h2>
+        <h4>Fatigue Data Analysis</h4>
+        <ol start="4" style="font-size: 26pt;">
+            <li>Pairing the optimal experiment design with the splines-based hazard model results in robust estimation of arbitrary $S$-$N$ curves in an efficient manner</li>
+            <ul>
+                <li>The proposed hazard model is robust to the $S$-$N$ curve and cumulative damage model used to generate the data</li>
+                <li>The optimal experiment design, allowing negative stress steps, achieves efficient estimation</li>
+            </ul>
+        </ol>
+    </section>
+    <section data-auto-animate data-header="Completed Work">
+        <h2>Publications</h2>
+        <p style="font-size: 20pt;">Accepted journal articles</p>
+        <ol style="font-size: 18pt;">
+            <li>Wright, S. et al. Data Reduction Methods to Improve Computation Time for Calibration of Piston Thermal Models. SAE International Journal of Advances and Current Practices in Mobility 6, 513–522 (2023).</li>
+            <li>Wright, S. J. et al. An Efficient Statistical Inference Approach for Model Calibration Using Griddy Gibbs Sampling. ASME J. Risk Uncertainty Part B 11, (2025).</li>
+        </ol>
+        <p style="font-size: 20pt;">Journal articles under review</p>
+        <ol style="font-size: 18pt;">
+            <li>Wright, S. J. et al. Optimization for Sensor Placement in Piston Thermal Testing. International Journal of Engine Research, under review.</li>
+            <li>Wright, S. J. et al. High-Dimensional Calibration of a Digital Twin for an Off-Road Tracked Ground Vehicle. ASME J. Dynamic Systems, Measurement and Control, under review.</li>
+            <li>Wright, S. J., McMahan, C. & Redmond, L. Bayesian Optimal Experiment Design of Accelerated Fatigue Tests Using a Nonparametric Survival Model. Probabilistic Engineering Mechanics, submission soon.</li>
+        </ol>
+    </section>
+    <section data-auto-animate data-header="Completed Work">
+        <h2>Publications</h2>
+        <p style="font-size: 20pt;">Journal articles in progress</p>
+        <ol style="font-size: 18pt;">
+            <li>Validation of the proposed thermocouple location optimization approach with experimental data from a piston whose thermocouple locations were selected by this approach</li>
+        </ol>
+        <p style="font-size: 20pt;">Conference papers</p>
+        <ol style="font-size: 18pt;">
+            <li>Wright, S. et al. Data Reduction Methods to Improve Computation Time for Calibration of Piston Thermal Models. in (SAE World Congress Experience, Detroit, MI, 2023).</li>
+            <li>Wright, S. et al. Benchmarking of Neural Network Methodologies for Piston Thermal Model Calibration. in (SAE World Congress Experience, Detroit, MI, 2024). doi:10.4271/2024-01-2598.</li>
+        </ol>
+    </section>
+
+    <section data-auto-animate data-header="Next Steps">
+        <h2>Future Work</h2>
+        <ol style="font-size: 24pt;">
+            <li>Further investigation of alternative treatments for model discrepancy in Bayesian model calibration to resolve identifiability issues</li>
+            <!--<li>Validation of proposed thermocouple location optimization approach (in progress)</li>-->
+            <li>Extend the proposed thermocouple location optimization approach to consider multiple sensor types (e.g. thermocouples and strain gauges)</li>
+            <li>Extend the proposed thermocouple location optimization approach to consider calibration of backside boundary conditions and validation of CFD model simultaneously</li>
+            <li>Validation of proposed fatigue data analysis and test design framework</li>
+        </ol>
+    </section>
+</section>
