@@ -55,7 +55,7 @@
         </h2>
         -->
         <p class="author">Stephen Jay Wright</p>
-        <p class="date">August 26, 2026</p>
+        <p class="date">November 9, 2026</p>
         <p style="font-size: 18pt;">
           DISTRIBUTION STATEMENT A. Approved for public release; distribution is unlimited. OPSEC10975
         </p>
@@ -69,6 +69,22 @@
         <section>
             <section>
                 <h1>Bayesian Model Calibration</h1>
+            </section>
+            <section data-header="Bayesian Model Calibration [Introduction]">
+                <h2>Computer Models</h2>
+                <ul>
+                    <li>Computer simulations are prolific in engineering</li>
+                    <li>Often require specification of unknown parameters</li>
+                </ul>
+                <aside class="notes">
+                    Numerical solutions to complicated differential equations
+                    <br>
+                    Can estimate entire fields over space and time
+                    <br>
+                    ...
+                    <br>
+                    Boundary conditions, material properties
+                </aside>
             </section>
             <section data-header="Bayesian Model Calibration [Introduction]">
                 <h2>Bayes' Theorem</h2>
@@ -406,6 +422,28 @@
                 </ul>
             </section>
 
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Data Model</h2>
+                $$\footnotesize \mathbf{y} \sim \textrm{MVN}(\mathbf{g} + \boldsymbol{\delta},\sigma^2 \mathbf{I}) \rightarrow \mathbf{y} \sim \textrm{MVN}(\mathbf{g} ,\sigma^2 \mathbf{I} + \boldsymbol{\Sigma})$$
+                <ul>
+                    <li>$\boldsymbol{\Sigma} = \tau^2 k(\mathbf{x}_i,\mathbf{x}_j),\; i,j = 1,\ldots,n$</li>
+                    <li>$k(\mathbf{x},\mathbf{x}') = \prod_{q=1}^Q \rho^{4(x_q - x'_q)^2}$</li>
+                </ul>
+            </section>
+
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Data Model</h2>
+                We can reqrite the covariance as
+                $$\boldsymbol{\Sigma} + \sigma^2 \mathbf{I} = \tau^2 \mathbf{K} + \sigma^2 \mathbf{I} = \sigma^2(\mathbf{I} + \phi \mathbf{K})$$
+                <ul>
+                    <li>$\phi = \frac{\tau^2}{\sigma^2}$</li>
+                    <li>$\boldsymbol{\Sigma}^* = \mathbf{I} + \phi \mathbf{K}$</li>
+                </ul>
+                $$ \mathbf{y} \sim \textrm{MVN}(\mathbf{g} ,\sigma^2 \boldsymbol{\Sigma}^*)$$
+                
+            </section>
+
+
             <!--Select Grid-->
             <section data-header="Griddy Gibbs Calibration [Approach]">
                 <h2>Approach</h2>
@@ -521,11 +559,11 @@
             <section data-header="Griddy Gibbs Calibration [Approach]">
                 <h2>Precomputation</h2>
                 <ol style="font-size: 24pt;">
-                    <li>Precompute $C(\boldsymbol{\theta},\phi,\rho)$</li>
+                    <li>Precompute $C(\boldsymbol{\theta},\phi,\rho) \rightarrow C_{j_1,j_2,j_3}$</li>
                     <ul>
                         <li>Over selected grid of $\boldsymbol{\theta}$ and grids of $\phi$ and $\rho$</li>
                     </ul>
-                    <li>Precompute $|\boldsymbol{\Sigma}^*|$</li>
+                    <li>Precompute $|\boldsymbol{\Sigma}^*| \rightarrow D_{j_2,j_3}$</li>
                     <ul>
                         <li>Over grids of $\phi$ and $\rho$</li>
                     </ul>
@@ -534,9 +572,43 @@
                     Evaluation of the likelihood is trivial when these are precomputed
                 </div>
             </section>
+
+            <!--Priors-->
             
-            <!--
-            <section data-header="Griddy Gibbs Calibration [Posterior]">
+            <section>
+                <h2>Approach</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/gg/gg_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+                    <rect x="329" y="195" width="225" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Prior Distributions</h2>
+                <ul>
+                    <li>$\pi(\theta_p) \sim \textrm{U}(a_p,b_p)$</li>
+                    <li>$\pi(\sigma^2) \sim \textrm{IG}(\alpha_1,\beta_1)$</li>
+                    <li>$\pi(\phi) \sim \textrm{IG}(\alpha_2,\beta_2)$</li>
+                    <li>$\pi(\rho) \sim \textrm{U}(0,1)$</li>
+                </ul>
+            </section>
+            
+            <!--sampler-->
+            <section data-header="Griddy Gibbs Calibration [Approach]">
+                <h2>Approach</h2>
+                <div class="img-overlay-wrap">
+                    <div class="figure" style="width:100%; height: auto;">
+                        <img src="assets/figures/gg/gg_flowchart.png">
+                    </div>
+                    <svg viewBox="0 0 1000 600" width="1000" height="600" class="fragment fade-in">
+                    <rect x="625" y="35" width="274" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
+                    </svg>
+                </div>
+            </section>
+            <section data-header="Griddy Gibbs Calibration [Approach]">
                 <h2>Joint Posterior</h2>
                 $$
                 \begin{align*}
@@ -546,7 +618,7 @@
                 \end{align*}
                 $$
             </section>
-            <section data-header="Griddy Gibbs Calibration [Posterior]">
+            <section data-header="Griddy Gibbs Calibration [Approach]">
                 <h2>Full Conditionals</h2>
                 $$
                 \begin{align*}
@@ -559,14 +631,14 @@
                 \end{align*}
                 $$
             </section>
-            <section data-header="Griddy Gibbs Calibration [Posterior]">
+            <section data-header="Griddy Gibbs Calibration [Approach]">
                 <h2>Posterior Sampling</h2>
                 <ul>
                     <li>Draw $\sigma^{2(s+1)} \sim \textrm{IG}\left(\frac{n}{2}+\alpha_1, \frac{1}{2}C_{j_1^{(s)},j_2^{(s)},j_3^{(s)}} +\beta_1 \right)$</li>
                     <li>Griddy Gibbs sampling for $\boldsymbol{\theta}$, $\phi$, and $\rho$</li>
                 </ul>
             </section>
-            <section data-header="Griddy Gibbs Calibration [Posterior]">
+            <section data-header="Griddy Gibbs Calibration [Approach]">
                 <h2>Posterior Sampling</h2>
                 Draw $\boldsymbol{\theta}^{(s+1)}$ from $\{\boldsymbol{\theta}_1,\ldots,\boldsymbol{\theta}_{J_1}\}$, with probabilities $\{p_{1}^{\boldsymbol{\theta}},\ldots,p_{J_1}^{\boldsymbol{\theta}}\}$, 
             where $p_{j_1}^{\boldsymbol{\theta}} = q_{j_1}^{\boldsymbol{\theta}}\{\sum_{k=1}^{J_1} q_{k}^{\boldsymbol{\theta}}\}^{-1}$ and
@@ -575,7 +647,7 @@
             \end{align*}$$
             and set $j_1^{(s+1)}$ to be the index of the sampled value.
             </section>
-            <section data-header="Griddy Gibbs Calibration [Posterior]">
+            <section data-header="Griddy Gibbs Calibration [Approach]">
                 <h2>Posterior Sampling</h2>
                 Draw $\rho^{(s+1)}$ from $\{\rho_1,\ldots,\rho_{J_2}\}$, with probabilities $\{p_{1}^{\rho},\ldots,p_{J_2}^{\rho}\}$, 
             where $p_{j_2}^{\rho} = q_{j_2}^{\rho}\{\sum_{k=1}^{J_2} q_{k}^{\rho}\}^{-1}$ and
@@ -584,7 +656,7 @@
             \end{align*}$$
             and set $j_2^{(s+1)}$ to be the index of the sampled value.
             </section>
-            <section data-header="Griddy Gibbs Calibration [Posterior]">
+            <section data-header="Griddy Gibbs Calibration [Approach]">
                 <h2>Posterior Sampling</h2>
                 Draw $\phi^{2(s+1)}$ from $\{\phi_1,\ldots,\phi_{J_3}\}$, with probabilities $\{p_{1}^{\phi},\ldots,p_{J_3}^{\phi}\}$, 
             where $p_{j_3}^{\phi} = q_{j_3}^{\phi}\{\sum_{k=1}^{J_3} q_{k}^{\phi}\}^{-1}$ and
@@ -593,31 +665,7 @@
             \end{align*}$$
             and set $j_3^{(s+1)}$ to be the index of the sampled value.
             </section>
-            -->
-
-            <!--Priors-->
-            <!--
-            <section>
-                <h2>Approach</h2>
-                <div class="img-overlay-wrap">
-                    <div class="figure" style="width:100%; height: auto;">
-                        <img src="assets/figures/gg/gg_flowchart.png">
-                    </div>
-                    <svg viewBox="0 0 1000 600" width="1000" height="600">
-                    <rect x="329" y="195" width="225" height="88" stroke="var(--orange1)" stroke-width="6" fill="none"></rect>
-                    </svg>
-                </div>
-            </section>
-            <section data-header="Griddy Gibbs Calibration [Priors]">
-                <h2>Prior Distributions</h2>
-                <ul>
-                    <li>$\pi(\theta_p) \sim \textrm{U}(a_p,b_p)$</li>
-                    <li>$\pi(\sigma^2) \sim \textrm{IG}(\alpha_1,\beta_1)$</li>
-                    <li>$\pi(\phi) \sim \textrm{IG}(\alpha_2,\beta_2)$</li>
-                    <li>$\pi(\rho) \sim \textrm{U}(0,1)$</li>
-                </ul>
-            </section>
-            -->
+            
 
             
             
